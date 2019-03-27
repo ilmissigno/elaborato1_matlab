@@ -56,3 +56,4 @@ x0 = [0 4];
 TOL = 10^-15;
 NMAX = 1000;
 [x, uscita, graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
+accuratezza=CalcoloAccuratezza(f,x0,TOL,NMAX);
