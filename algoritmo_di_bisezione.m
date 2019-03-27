@@ -15,7 +15,7 @@ function [X,output,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
 %            - fx = valore della funzione in x
 %            - niter = numero di iterazioni
 %   graf = facoltativo, variabile tipo carattere, fa il grafico della funzione e dello zero trovato
-%ciao
+%
 %
 % Diagnostica:
 %   Il programma si arresta se non riceve in ingresso un opportuno
