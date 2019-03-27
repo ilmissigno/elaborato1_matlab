@@ -20,7 +20,7 @@ function [X,output,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
 % Diagnostica:
 %   Il programma si arresta se non riceve in ingresso un opportuno
 %   intervallo (es. estremi uguali)
-%   Nel caso in cui il valore di TOL in ingresso 
+%   Nel caso in cui il valore di TOL in ingresso
 %   non sia un valore intero, viene effettuato un arrotondamento.
 %
 % Esempi di Utilizzo
@@ -96,11 +96,11 @@ fa = f(a);
 fb = f(b);
 fc = f(c);
 x=c;
-if(fa==0)
+if(fa<eps)
     x=a;
     fc=f(a);
 end
-if(fb==0)
+if(fb<eps)
     x=b;
     fc=f(b);
 else
