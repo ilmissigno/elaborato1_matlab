@@ -22,7 +22,7 @@ function varargout = MainGUI(varargin)
 
 % Edit the above text to modify the response to help MainGUI
 
-% Last Modified by GUIDE v2.5 27-Mar-2019 22:04:09
+% Last Modified by GUIDE v2.5 28-Mar-2019 00:34:43
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -46,13 +46,13 @@ end
 
 % --- Executes just before MainGUI is made visible.
 function MainGUI_OpeningFcn(hObject, eventdata, handles, varargin)
-% This function has no output args, see OutputFcn.
+% This function has no ris args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to MainGUI (see VARARGIN)
 
-% Choose default command line output for MainGUI
+% Choose default command line ris for MainGUI
 handles.output = hObject;
 
 % Update handles structure
@@ -64,12 +64,12 @@ guidata(hObject, handles);
 
 % --- Outputs from this function are returned to the command line.
 function varargout = MainGUI_OutputFcn(hObject, eventdata, handles) 
-% varargout  cell array for returning output args (see VARARGOUT);
+% varargout  cell array for returning ris args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Get default command line output from handles structure
+% Get default command line ris from handles structure
 varargout{1} = handles.output;
 
 
@@ -78,8 +78,8 @@ function fun_Callback(hObject, eventdata, handles)
 % hObject    handle to fun (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.f = get(hObject,'String');
-if(isempty(handles.f))
+handles.funz = get(hObject,'String');
+if(isempty(handles.funz))
     errordlg('Inserire funzione per il calcolo');
 end
 guidata(hObject,handles);
@@ -103,8 +103,8 @@ function val_a_Callback(hObject, eventdata, handles)
 % hObject    handle to val_a (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.a = str2double(get(hObject,'String'));
-if(isempty(handles.a))
+handles.vala = str2double(get(hObject,'String'));
+if(isempty(handles.vala))
     errordlg('Inserire estremo a per il calcolo');
 end
 guidata(hObject,handles);
@@ -130,8 +130,8 @@ function val_b_Callback(hObject, eventdata, handles)
 % hObject    handle to val_b (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.b = str2double(get(hObject,'String'));
-if(isempty(handles.b))
+handles.valb = str2double(get(hObject,'String'));
+if(isempty(handles.valb))
     errordlg('Inserire estremo b per il calcolo');
 end
 guidata(hObject,handles);
@@ -156,11 +156,12 @@ function tol_Callback(hObject, eventdata, handles)
 % hObject    handle to tol (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.TOL = str2double(get(hObject,'String'));
-if(isempty(handles.TOL))
+handles.toll = str2double(get(hObject,'String'));
+if(isempty(handles.toll))
     warndlg('Attenzione! : Valore di Tolleranza non specificato, uso eps');
     handles.TOL = eps;
 end
+handles.toll = 10.^(handles.toll);
 guidata(hObject,handles);
 % Hints: get(hObject,'String') returns contents of tol as text
 %        str2double(get(hObject,'String')) returns contents of tol as a double
@@ -184,10 +185,10 @@ function nmax_Callback(hObject, eventdata, handles)
 % hObject    handle to nmax (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.NMAX = str2double(get(hObject,'String'));
-if(isempty(handles.NMAX))
+handles.nummax = str2double(get(hObject,'String'));
+if(isempty(handles.nummax))
     warndlg('Attenzione! : Numero iterazioni massimo non specificato, uso 500 come valore di default');
-    handles.NMAX = 500;
+    handles.nummax = 500;
 end
 guidata(hObject,handles);
 % Hints: get(hObject,'String') returns contents of nmax as text
@@ -212,9 +213,14 @@ function btnCalcola_Callback(hObject, eventdata, handles)
 % hObject    handle to btnCalcola (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-x0 = [handles.a handles.b];
-[x, uscita, graf] = algoritmo_di_bisezione(handles.f,x0,handles.TOL,handles.NMAX);
-
+x0 = [handles.vala handles.valb];
+handles.funz=inline(handles.funz);
+[x, uscita , graf] = algoritmo_di_bisezione(handles.funz,x0,handles.toll,handles.nummax);
+acc = CalcoloAccuratezza(handles.funz,x0,handles.toll,handles.nummax);
+testo = sprintf('Valore del punto x = %f',x);
+testo = sprintf('%s\nValore di f(x) = %f',testo,uscita.fx);
+testo = sprintf('%s\nValore di accuratezza = %f',testo,acc);
+set(handles.ris,'String',testo);
 
 % --- Executes on button press in btnCheckfzero.
 function btnCheckfzero_Callback(hObject, eventdata, handles)

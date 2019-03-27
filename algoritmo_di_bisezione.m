@@ -1,4 +1,4 @@
-function [X,output,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
+function [X,result,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
 %% Funzione che implementa l'algoritmo di bisezione per il calcolo dello zero di una funzione
 % Sintassi:
 % [x,output,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
@@ -125,10 +125,12 @@ if(nargout==1)
    X = x;
 elseif(nargout==2)
     X = x;
-    output = [fc niter];
+    result.fx = fc;
+    result.numiter = niter;
 elseif(nargout==3)
     X = x;
-    output = [fc niter];
+    result.fx = fc;
+    result.numiter = niter;
     inter = -1:0.001:5;
     graf = plot(inter,f(inter));
     hold on
