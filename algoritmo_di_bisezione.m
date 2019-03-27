@@ -96,11 +96,11 @@ fa = f(a);
 fb = f(b);
 fc = f(c);
 x=c;
-if(fa<eps)
+if(abs(fa)<eps)
     x=a;
     fc=f(a);
 end
-if(fb<eps)
+if(abs(fb)<eps)
     x=b;
     fc=f(b);
 else

@@ -1,9 +1,9 @@
 %% Algoritmo di Bisezione
 %%
-% Autori : Giuseppe Napolano M63000856 Raffaele Formisano M63000912
+% Autori : Giuseppe Napolano M63000856 Raffaele Formisano M63000912 Giuseppe Romito M63000936
 %% Scopo
-% L'algoritmo di Bisezione calcola un'approssimazione del valore in 
-% cui si annulla la funzione, utilizzando l'algoritmo stabile ed il 
+% L'algoritmo di Bisezione calcola un'approssimazione del valore in
+% cui si annulla la funzione, utilizzando l'algoritmo stabile ed il
 % criterio di arresto con la tolleranza gestita dall'utente.
 %% Specifiche
 % x = algoritmo_di_bisezione(f,x0)
@@ -49,10 +49,10 @@
 %%
 %% Descrizione
 % L'algoritmo di Bisezione riceve in ingresso la funzione e l'intervallo in
-% cui deve calcolare il valore di annullamento della stessa. 
+% cui deve calcolare il valore di annullamento della stessa.
 format long e
 f = @(x) 2-exp(-x)-sqrt(x);
 x0 = [0 4];
 TOL = 10^-15;
 NMAX = 1000;
-[x uscita graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
+[x, uscita, graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
