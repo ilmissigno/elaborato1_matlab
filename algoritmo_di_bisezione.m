@@ -1,7 +1,7 @@
 function [X,result,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
 %% Funzione che implementa l'algoritmo di bisezione per il calcolo dello zero di una funzione
 % Sintassi:
-% [x,output,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
+% [x,result,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
 %
 % Parametri di ingresso:
 %   f = funzione di cui calcolare lo zero (function handle)
@@ -11,7 +11,7 @@ function [X,result,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
 % Parametri di output
 %
 %   X = valore dell'approssimazione dello zero
-%   output = facoltativo,struttura con 2 campi:
+%   result = facoltativo,struttura con 2 campi:
 %            - fx = valore della funzione in x
 %            - niter = numero di iterazioni
 %   graf = facoltativo, variabile tipo carattere, fa il grafico della funzione e dello zero trovato
@@ -67,25 +67,9 @@ end
 if(x0(1)==x0(2))
    error('valori dell intervallo uguali');
 else
-   if(isempty(TOL))
-       TOL = eps;
-   else
-       if(TOL<eps)
-           error('TOL deve rientrare nei valori di eps');
-       elseif(~isscalar(TOL))
-            error('TOL deve essere uno scalare');
-       elseif(~isfinite(TOL) ||  ~isreal(TOL) || ischar(TOL))
-            error('TOL deve essere settata come un numero reale.')
-       end
-       if (TOL < 0)
-            error('TOL non puo essere minore di zero.')
-       end
-   end
-   if(isempty(NMAX))
-       NMAX = 500; %limite massimo iterazioni
-   end
-   TOLF = eps;
-end
+  controllo_TOL(TOL);
+  controllo_NMAX(NMAX);
+end 
 %Inizializzazione variabili
 niter = 0;
 %Funzione effettiva
@@ -105,10 +89,10 @@ if(abs(fb)<eps)
     fc=f(b);
 else
     if(fa*fb>0)
-        error('non vi sono zeri');
+        error('La funzione non ha zeri nell intervallo specificato');
     end
-    while((abs(b-a))>=(TOL*max(abs(a),abs(b))) & abs(fc)>=TOLF & niter<NMAX)
-        niter = niter + 1
+    while((abs(b-a))>=(TOL*max(abs(a),abs(b))) && abs(fc)>=eps && niter<NMAX)
+        niter = niter + 1;
         if((fa*fc)<0)
             b=c;
             fb=fc;

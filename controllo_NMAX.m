@@ -1,0 +1,23 @@
+function controllo_NMAX(NMAX)
+
+
+    if(isempty(NMAX))
+       NMAX = 500; %valore di default se non lo inseriamo in ingresso
+    else
+    % Verifico che NMAX sia un intero positivo
+        if ~isscalar(NMAX) || ~isnumeric(NMAX) || isinf(NMAX) || isnan(NMAX) || NMAX <= 0 %|| mod(NMAX,1) == 0
+              error('NMAX deve essere un numero intero positivo');
+        end
+    
+    % Errore se NMAX è piccolo, cioè se indichiamo come valore minimo di
+    % NMAX 1
+         if NMAX < 2
+             error('Il numero di iterazioni inserito è troppo piccolo, il numero minimo di iterazioni è 2 ');
+         end
+    
+    % Segnalo se NMAX è grande
+         if NMAX > 1000
+            warning('Il numero di iterazioni inserito è molto alto, l''esecuzione potrebbe essere più lenta');
+         end
+    end
+end
