@@ -215,7 +215,7 @@ else
     %tolleranza dato che deve essere molto piccolo allora l'esponente deve
     %essere negativo.
     if(handles.toll>=0)
-        errordlg('Esponente specificato positivo! Il valore di tolleranza deve essere molto piccolo, inserire un esponente negativo.','Errore');
+        errordlg('Esponente specificato positivo! Il valore di tolleranza deve essere molto piccolo','Errore');
         return
     else
     handles.toll = 10.^(handles.toll);

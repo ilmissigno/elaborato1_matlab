@@ -65,6 +65,8 @@ if(nargin==1)
     error('Inserire intervallo assieme alla funzione');
 end
 if(x0(1)==x0(2))
+    %inserito verifica intervallo
+    errordlg('Valori di a e b uguali','Errore');
    error('valori dell intervallo uguali');
 else
   controllo_TOL(TOL);
@@ -89,6 +91,8 @@ if(abs(fb)<eps)
     fc=f(b);
 else
     if(fa*fb>0)
+        %Inserito messaggio di errore zeri
+        errordlg('La funzione non ha zeri nell intervallo specificato','Errore');
         error('La funzione non ha zeri nell intervallo specificato');
     end
     while((abs(b-a))>=(TOL*max(abs(a),abs(b))) && abs(fc)>=eps && niter<NMAX)
