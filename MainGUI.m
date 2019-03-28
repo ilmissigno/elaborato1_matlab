@@ -212,20 +212,16 @@ if(~isfield(handles,'toll'))
     handles.toll = eps;
 else
     handles.toll = 10.^(handles.toll);
-    %PEPPE ROMITO : Metti qui al posto di questo commento 
-    %il controllo di TOL (richiama la funzione con
-    %il valore di handles.toll in ingresso) e rimuovi dalla funzione
-    %il controllo (isempty(TOL)) dato che lo controlla nell'if sopra 
+    controllo_TOL(handles.toll);
+    
 end
 if(~isfield(handles,'nummax'))
     warndlg('Attenzione! : Numero iterazioni massimo non specificato, uso 500 come valore di default','Attenzione');
     uiwait(gcf);
     handles.nummax = 500;
 else
-    %PEPPE ROMITO : Metti qui al posto di questo commento
-    %il controllo di NMAX (richiama la funzione con
-    %il valore di handles.nummax in ingresso) e rimuovi dalla funzione
-    %il controllo (isempty(NMAX)) dato che lo controlla nell'if sopra 
+    controllo_NMAX(handles.nummax);
+ 
 end
 x0 = [handles.vala handles.valb];
 handles.funz=inline(handles.funz);
@@ -260,9 +256,8 @@ if(~isfield(handles,'nummax'))
     uiwait(gcf);
     handles.nummax = 500;
 else
-     %PEPPE ROMITO : Metti qui il controllo di NMAX (richiama la funzione con
-    %il valore di handles.nummax in ingresso) e rimuovi dalla funzione
-    %il controllo (isempty(NMAX)) dato che lo controlla nell'if sopra 
+    controllo_NMAX(handles.nummax);
+     
 end
 x0 = [handles.vala handles.valb];
 toll=[10^-1 10^-2 10^-3  10^-4 10^-5 10^-6 10^-7 10^-8 10^-9 10^-10 10^-12 10^-13 10^-14 eps];

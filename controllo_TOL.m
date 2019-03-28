@@ -1,9 +1,8 @@
 function controllo_TOL(TOL)
 %% Funzione che controlla che i valori di tollerenza immessi dall'utente siano corretti
 
-   if(isempty(TOL))
-       TOL = eps;
-   else
+  
+ 
        if(TOL>0 && TOL<eps)
            errordlg('TOL deve rientrare nei valori di eps','Errore');
            error('TOL deve rientrare nei valori di eps');
@@ -20,4 +19,4 @@ function controllo_TOL(TOL)
        end
        %TOLF = eps;
    end
-end
+

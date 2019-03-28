@@ -21,3 +21,4 @@ function controllo_NMAX(NMAX)
             uiwait(gcf);
          end
     end
+end
