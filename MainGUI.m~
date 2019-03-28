@@ -195,6 +195,9 @@ function btnCalcola_Callback(hObject, eventdata, handles)
 % hObject    handle to btnCalcola (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+%RAFFAELE : Aggiunti controlli sui campi , mostro un messaggio di errore 
+%nel caso di funzione o intervallo non immesso o di warning per
+%tol = eps e nmax=500 valori di default
 if(~isfield(handles,'funz'))
     errordlg('Inserire funzione per il calcolo','Errore');
     return
@@ -209,6 +212,7 @@ if(~isfield(handles,'toll'))
     handles.toll = eps;
 else
     handles.toll = 10.^(handles.toll);
+    %PEPPE ROMITO : Metti
 end
 if(~isfield(handles,'nummax'))
     warndlg('Attenzione! : Numero iterazioni massimo non specificato, uso 500 come valore di default','Attenzione');
@@ -233,7 +237,8 @@ function btnCheckfzero_Callback(hObject, eventdata, handles)
 %sul pulsante Confronta con fzero (risolto problema dei grafici
 %sovrapposti)
 %RAFFAELE : Aggiunti controlli sui campi , mostro un messaggio di errore 
-%nel caso di funzione o intervallo non immesso o di warning pe
+%nel caso di funzione o intervallo non immesso o di warning per
+%tol = eps e nmax=500 valori di default
 if(~isfield(handles,'funz'))
     errordlg('Inserire funzione per il calcolo','Errore');
     return
