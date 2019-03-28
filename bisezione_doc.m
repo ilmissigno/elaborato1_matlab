@@ -57,3 +57,7 @@ TOL = 10^-15;
 NMAX = 1000;
 [x, uscita, graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
 accuratezza=CalcoloAccuratezza(f,x0,TOL,NMAX);
+TOL=[10^-1 10^-2 10^-3  10^-4 10^-5 10^-6 10^-7 10^-8 10^-9 10^-10 10^-12 10^-13 10^-14 eps];
+%funzione che valuta la performance dei due approcci per le varie Tol
+% affichè funzioni si deve commentare o eliminare hold on del grafo precedente
+Valuta_Performance(f,x0,TOL,NMAX);
