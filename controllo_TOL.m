@@ -5,14 +5,18 @@ function controllo_TOL(TOL)
        TOL = eps;
    else
        if(TOL>0 && TOL<eps)
+           errordlg('TOL deve rientrare nei valori di eps','Errore');
            error('TOL deve rientrare nei valori di eps');
        elseif(~isscalar(TOL))
+            errordlg('TOL deve essere uno scalare','Errore');
             error('TOL deve essere uno scalare');
        elseif(~isfinite(TOL) ||  ~isreal(TOL) || ischar(TOL))
-            error('TOL deve essere settata come un numero reale.')
+            errordlg('TOL deve essere settata come un numero reale.','Errore');
+            error('TOL deve essere settata come un numero reale');
        end
        if (TOL < 0)
-            error('TOL non puo essere minore di zero.')
+            errordlg('TOL non puo essere minore di zero.','Errore');
+            error('TOL non puo essere minore di zero.');
        end
        %TOLF = eps;
    end

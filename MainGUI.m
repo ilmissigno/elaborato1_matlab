@@ -212,7 +212,8 @@ if(~isfield(handles,'toll'))
     handles.toll = eps;
 else
     handles.toll = 10.^(handles.toll);
-    %PEPPE ROMITO : Metti qui il controllo di TOL (richiama la funzione con
+    %PEPPE ROMITO : Metti qui al posto di questo commento 
+    %il controllo di TOL (richiama la funzione con
     %il valore di handles.toll in ingresso) e rimuovi dalla funzione
     %il controllo (isempty(TOL)) dato che lo controlla nell'if sopra 
 end
@@ -221,7 +222,8 @@ if(~isfield(handles,'nummax'))
     uiwait(gcf);
     handles.nummax = 500;
 else
-    %PEPPE ROMITO : Metti qui il controllo di NMAX (richiama la funzione con
+    %PEPPE ROMITO : Metti qui al posto di questo commento
+    %il controllo di NMAX (richiama la funzione con
     %il valore di handles.nummax in ingresso) e rimuovi dalla funzione
     %il controllo (isempty(NMAX)) dato che lo controlla nell'if sopra 
 end
