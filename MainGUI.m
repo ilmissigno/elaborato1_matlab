@@ -159,7 +159,7 @@ function tol_Callback(hObject, eventdata, handles)
 handles.toll = str2double(get(hObject,'String'));
 if(isempty(handles.toll))
     warndlg('Attenzione! : Valore di Tolleranza non specificato, uso eps');
-    handles.TOL = eps;
+    handles.toll = eps;
 end
 handles.toll = 10.^(handles.toll);
 guidata(hObject,handles);
@@ -227,6 +227,12 @@ function btnCheckfzero_Callback(hObject, eventdata, handles)
 % hObject    handle to btnCheckfzero (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+%RAFFAELE : Definita funzione di Verifica con fzero non appena si clicca
+%sul pulsante Confronta con fzero (risolto problema dei grafici
+%sovrapposti)
+x0 = [handles.vala handles.valb];
+toll=[10^-1 10^-2 10^-3  10^-4 10^-5 10^-6 10^-7 10^-8 10^-9 10^-10 10^-12 10^-13 10^-14 eps];
+Valuta_Performance(inline(handles.funz),x0,toll,handles.nummax);
 
 
 % --- Executes on button press in btnCasiTest.

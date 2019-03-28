@@ -30,5 +30,6 @@ legend('Risultati Bisezione','Risultati Fzero','Location','northwest');
 set(gca,'Xdir','reverse');
 xlabel('TOL') ;
 ylabel('Numero di iterazioni') 
-
-
+%RAFFAELE : una volta stampato il grafico effettuo un hold off per attivare
+%l'altro grafico del calcolo in algoritmo_di_bisezione
+hold off

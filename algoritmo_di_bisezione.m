@@ -123,4 +123,7 @@ elseif(nargout==3)
     ax.XAxisLocation = 'origin';
     ax.YAxisLocation = 'origin';
     box off
+    %RAFFAELE : una volta stampato il grafico effettuo un hold off per attivare
+    %l'altro grafico del calcolo in Valuta_Performance
+    hold off
 end
