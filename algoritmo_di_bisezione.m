@@ -47,7 +47,7 @@ function [X,result,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
 %
 % --------------------------------------------------------------------
 %
-% f = @(x) exp(x) - 2;
+% f = @(x) exp(x)-2;
 % x0 = [0 2];
 % TOL = 10^-8;
 % NMAX = 1000;
