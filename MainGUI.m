@@ -247,7 +247,7 @@ function btnCheckfzero_Callback(hObject, eventdata, handles)
 %RAFFAELE : Definita funzione di Verifica con fzero non appena si clicca
 %sul pulsante Confronta con fzero (risolto problema dei grafici
 %sovrapposti)
-%RAFFAELE : Aggiunti controlli sui campi , mostro un messaggio di errore 
+%RAFFAELE : Aggiunti controlli sui campi ,mostro un messaggio di errore 
 %nel caso di funzione o intervallo non immesso o di warning per
 %tol = eps e nmax=500 valori di default
 if(~isfield(handles,'funz'))
