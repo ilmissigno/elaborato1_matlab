@@ -21,27 +21,27 @@
 %%
 % [x uscita graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
 %% Parametri di Input
-% -*_f_* = funzione di cui calcolare lo zero (espressa come function handle)
+% - *_f_* = funzione di cui calcolare lo zero (espressa come function handle)
 %%
-% -*_x0_* = Intervallo iniziale (espresso con un vettore con estremi
+% - *_x0_* = Intervallo iniziale (espresso con un vettore con estremi
 % differenti
 %%
-% -*_TOL_* = facoltativo, accuratezza richiesta dall'utente, se omesso
+% - *_TOL_* = facoltativo, accuratezza richiesta dall'utente, se omesso
 % viene posto pari a eps
 %%
-% -*_NMAX_* = facoltativo, numero massimo di iterazioni, se omesso
+% - *_NMAX_* = facoltativo, numero massimo di iterazioni, se omesso
 % NMAX=500
 %%
 %% Parametri di Output
-% -*_x_* = valore dell'approssimazione dello zero della funzione
+% - *_x_* = valore dell'approssimazione dello zero della funzione
 %%
-% -*_output_* = facoltativo,struttura con 2 campi:
+% - *_output_* = facoltativo,struttura con 2 campi:
 %%
 % - *_fx_* valore della funzione in *_x_*
 %%
 % - *_niter_* numero di iterazioni
 %%
-% -*_graf_* = facoltativo, variabile di tipo carattere, fa il grafico della
+% - *_graf_* = facoltativo, variabile di tipo carattere, fa il grafico della
 % funzione e dello zero trovato
 %%
 
@@ -137,7 +137,5 @@ elseif(nargout==3)
     ax.XAxisLocation = 'origin';
     ax.YAxisLocation = 'origin';
     box off
-    %RAFFAELE : una volta stampato il grafico effettuo un hold off per attivare
-    %l'altro grafico del calcolo in Valuta_Performance
     hold off
 end

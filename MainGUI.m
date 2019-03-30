@@ -22,7 +22,7 @@ function varargout = MainGUI(varargin)
 
 % Edit the above text to modify the response to help MainGUI
 
-% Last Modified by GUIDE v2.5 28-Mar-2019 00:34:43
+% Last Modified by GUIDE v2.5 30-Mar-2019 10:40:48
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -198,42 +198,51 @@ function btnCalcola_Callback(hObject, eventdata, handles)
 %RAFFAELE : Aggiunti controlli sui campi , mostro un messaggio di errore 
 %nel caso di funzione o intervallo non immesso o di warning per
 %tol = eps e nmax=500 valori di default
-if(~isfield(handles,'funz'))
+funz = get(handles.fun, 'String');
+vala = get(handles.val_a, 'String');
+valb = get(handles.val_b, 'String');
+toll = get(handles.tol, 'String');
+nummax = get(handles.nmax, 'String');
+if(isempty(funz))
     errordlg('Inserire funzione per il calcolo','Errore');
     return
 end
-if(~isfield(handles,'vala') || ~isfield(handles,'valb'))
+if(isempty(vala) || isempty(valb))
     errordlg('Inserire estremo a e b per il calcolo','Errore');
     return
+else
+    vala = str2double(vala);
+    valb = str2double(valb);
 end
-if(~isfield(handles,'toll'))
+if(isempty(toll))
     warndlg('Attenzione! : Valore di Tolleranza non specificato, uso eps','Attenzione');
     uiwait(gcf);
-    handles.toll = eps;
+    toll = eps;
 else
+    toll = str2double(toll);
     %Ho modificato qui per verificare il valore dell'esponente di
     %tolleranza dato che deve essere molto piccolo allora l'esponente deve
     %essere negativo.
-    if(handles.toll>=0)
+    if(toll>=0)
         errordlg('Esponente specificato positivo! Il valore di tolleranza deve essere molto piccolo, inserire un esponente negativo.','Errore');
         return
     else
-    handles.toll = 10.^(handles.toll);
-    controllo_TOL(handles.toll);
+    toll = 10.^(toll);
+    controllo_TOL(toll);
     end
 end
-if(~isfield(handles,'nummax'))
+if(isempty(nummax))
     warndlg('Attenzione! : Numero iterazioni massimo non specificato, uso 500 come valore di default','Attenzione');
     uiwait(gcf);
-    handles.nummax = 500;
+    nummax = 500;
 else
-    controllo_NMAX(handles.nummax);
- 
+    nummax = str2double(nummax);
+    controllo_NMAX(nummax);
 end
-x0 = [handles.vala handles.valb];
-handles.funz=inline(handles.funz);
-[x, uscita , graf] = algoritmo_di_bisezione(handles.funz,x0,handles.toll,handles.nummax);
-acc = CalcoloAccuratezza(handles.funz,x0,handles.toll,handles.nummax);
+x0 = [vala valb];
+funz=inline(funz);
+[x, uscita , graf] = algoritmo_di_bisezione(funz,x0,toll,nummax);
+acc = CalcoloAccuratezza(funz,x0,toll,nummax);
 testo = sprintf('Valore del punto x = %f',x);
 testo = sprintf('%s\nValore di f(x) = %f',testo,uscita.fx);
 testo = sprintf('%s\nValore di accuratezza = %f',testo,acc);
@@ -250,25 +259,32 @@ function btnCheckfzero_Callback(hObject, eventdata, handles)
 %RAFFAELE : Aggiunti controlli sui campi ,mostro un messaggio di errore 
 %nel caso di funzione o intervallo non immesso o di warning per
 %tol = eps e nmax=500 valori di default
-if(~isfield(handles,'funz'))
+funz = get(handles.fun, 'String');
+vala = get(handles.val_a, 'String');
+valb = get(handles.val_b, 'String');
+nummax = get(handles.nmax, 'String');
+if(isempty(funz))
     errordlg('Inserire funzione per il calcolo','Errore');
     return
 end
-if(~isfield(handles,'vala') || ~isfield(handles,'valb'))
+if(isempty(vala) || isempty(valb))
     errordlg('Inserire estremo a e b per il calcolo','Errore');
     return
+else
+    vala = str2double(vala);
+    valb = str2double(valb);
 end
-if(~isfield(handles,'nummax'))
+if(isempty(nummax))
     warndlg('Attenzione! : Numero iterazioni massimo non specificato, uso 500 come valore di default','Attenzione');
     uiwait(gcf);
-    handles.nummax = 500;
+    nummax = 500;
 else
-    controllo_NMAX(handles.nummax);
-     
+    nummax = str2double(nummax);
+    controllo_NMAX(nummax);
 end
-x0 = [handles.vala handles.valb];
+x0 = [vala valb];
 toll=[10^-1 10^-2 10^-3  10^-4 10^-5 10^-6 10^-7 10^-8 10^-9 10^-10 10^-12 10^-13 10^-14 eps];
-Valuta_Performance(inline(handles.funz),x0,toll,handles.nummax);
+Valuta_Performance(inline(funz),x0,toll,nummax);
 
 
 % --- Executes on button press in btnCasiTest.
@@ -276,3 +292,11 @@ function btnCasiTest_Callback(hObject, eventdata, handles)
 % hObject    handle to btnCasiTest (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in btnInfo.
+function btnInfo_Callback(hObject, eventdata, handles)
+% hObject    handle to btnInfo (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+open('LiveScript/Documentazione_Bisezione.pdf')

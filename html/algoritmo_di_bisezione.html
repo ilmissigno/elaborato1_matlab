@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Algoritmo di Bisezione</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-30"><meta name="DC.source" content="algoritmo_di_bisezione.m"><style type="text/css">
+      --><title>Algoritmo di Bisezione</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-30"><meta name="DC.source" content="algoritmo_di_bisezione.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Algoritmo di Bisezione</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Scopo</a></li><li><a href="#2">Sintassi</a></li><li><a href="#11">Parametri di Input</a></li><li><a href="#16">Parametri di Output</a></li><li><a href="#22">Descrizione</a></li><li><a href="#24">Firma della funzione</a></li><li><a href="#26">Controllo dei parametri di ingresso</a></li><li><a href="#27">Inizializzazione delle variabili</a></li><li><a href="#28">Controllo il valore agli estremi dell'intervallo</a></li><li><a href="#29">Controllo il soddisfacimento del teorema degli zeri</a></li><li><a href="#30">Parte iterativa ai fini della soluzione del problema</a></li><li><a href="#32">Controllo sui parametri di uscita ed eventuale creazione del grafico di output</a></li></ul></div><h2 id="1">Scopo</h2><p>Data una generica funzione f in un intervallo [a,b]. L'algoritmo di bisezione calcola approssimativamente un  punto in cui f(x)=0.</p><h2 id="2">Sintassi</h2><p>x = algoritmo_di_bisezione(f,x0)</p><p>x = algoritmo_di_bisezione(f,x0,TOL);</p><p>x = algoritmo_di_bisezione(f,x0,TOL,NMAX);</p><p>[x uscita] = algoritmo_di_bisezione(f,x0);</p><p>[x uscita] = algoritmo_di_bisezione(f,x0,TOL);</p><p>[x uscita] = algoritmo_di_bisezione(f,x0,TOL,NMAX);</p><p>[x uscita graf] = algoritmo_di_bisezione(f,x0);</p><p>[x uscita graf] = algoritmo_di_bisezione(f,x0,TOL);</p><p>[x uscita graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);</p><h2 id="11">Parametri di Input</h2><p>-*_f_* = funzione di cui calcolare lo zero (espressa come function handle)</p><p>-*_x0_* = Intervallo iniziale (espresso con un vettore con estremi differenti</p><p>-*_TOL_* = facoltativo, accuratezza richiesta dall'utente, se omesso viene posto pari a eps</p><p>-*_NMAX_* = facoltativo, numero massimo di iterazioni, se omesso NMAX=500</p><h2 id="16">Parametri di Output</h2><p>-*_x_* = valore dell'approssimazione dello zero della funzione</p><p>-*_output_* = facoltativo,struttura con 2 campi:</p><p>- <b><i>fx</i></b> valore della funzione in <b><i>x</i></b></p><p>- <b><i>niter</i></b> numero di iterazioni</p><p>-*_graf_* = facoltativo, variabile di tipo carattere, fa il grafico della funzione e dello zero trovato</p><h2 id="22">Descrizione</h2><p>L'algoritmo di Bisezione riceve obbligatoriamente in ingresso la funzione e l'intervallo altrimenti si arresta.Opzionalmente se l'utente &egrave; esperto pu&ograve; inserire i valori TOL ed NMAX.</p><h2 id="24">Firma della funzione</h2><pre class="codeinput"><span class="keyword">function</span> [X,result,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
+  </style></head><body><div class="content"><h1>Algoritmo di Bisezione</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Scopo</a></li><li><a href="#2">Sintassi</a></li><li><a href="#11">Parametri di Input</a></li><li><a href="#16">Parametri di Output</a></li><li><a href="#22">Descrizione</a></li><li><a href="#24">Firma della funzione</a></li><li><a href="#26">Controllo dei parametri di ingresso</a></li><li><a href="#27">Inizializzazione delle variabili</a></li><li><a href="#28">Controllo il valore agli estremi dell'intervallo</a></li><li><a href="#29">Controllo il soddisfacimento del teorema degli zeri</a></li><li><a href="#30">Parte iterativa ai fini della soluzione del problema</a></li><li><a href="#32">Controllo sui parametri di uscita ed eventuale creazione del grafico di output</a></li></ul></div><h2 id="1">Scopo</h2><p>Data una generica funzione f in un intervallo [a,b]. L'algoritmo di bisezione calcola approssimativamente un  punto in cui f(x)=0.</p><h2 id="2">Sintassi</h2><p>x = algoritmo_di_bisezione(f,x0)</p><p>x = algoritmo_di_bisezione(f,x0,TOL);</p><p>x = algoritmo_di_bisezione(f,x0,TOL,NMAX);</p><p>[x uscita] = algoritmo_di_bisezione(f,x0);</p><p>[x uscita] = algoritmo_di_bisezione(f,x0,TOL);</p><p>[x uscita] = algoritmo_di_bisezione(f,x0,TOL,NMAX);</p><p>[x uscita graf] = algoritmo_di_bisezione(f,x0);</p><p>[x uscita graf] = algoritmo_di_bisezione(f,x0,TOL);</p><p>[x uscita graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);</p><h2 id="11">Parametri di Input</h2><p>- <b><i>f</i></b> = funzione di cui calcolare lo zero (espressa come function handle)</p><p>- <b><i>x0</i></b> = Intervallo iniziale (espresso con un vettore con estremi differenti</p><p>- <b><i>TOL</i></b> = facoltativo, accuratezza richiesta dall'utente, se omesso viene posto pari a eps</p><p>- <b><i>NMAX</i></b> = facoltativo, numero massimo di iterazioni, se omesso NMAX=500</p><h2 id="16">Parametri di Output</h2><p>- <b><i>x</i></b> = valore dell'approssimazione dello zero della funzione</p><p>- <b><i>output</i></b> = facoltativo,struttura con 2 campi:</p><p>- <b><i>fx</i></b> valore della funzione in <b><i>x</i></b></p><p>- <b><i>niter</i></b> numero di iterazioni</p><p>- <b><i>graf</i></b> = facoltativo, variabile di tipo carattere, fa il grafico della funzione e dello zero trovato</p><h2 id="22">Descrizione</h2><p>L'algoritmo di Bisezione riceve obbligatoriamente in ingresso la funzione e l'intervallo altrimenti si arresta.Opzionalmente se l'utente &egrave; esperto pu&ograve; inserire i valori TOL ed NMAX.</p><h2 id="24">Firma della funzione</h2><pre class="codeinput"><span class="keyword">function</span> [X,result,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
 </pre><h2 id="26">Controllo dei parametri di ingresso</h2><pre class="codeinput"><span class="keyword">if</span>(nargin==0)
     error(<span class="string">'Nessun valore in ingresso'</span>);
 <span class="keyword">end</span>
@@ -91,8 +91,6 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
     <span class="keyword">else</span> NMAX=500;
     <span class="keyword">end</span>
 <span class="keyword">end</span>
-</pre><pre class="codeoutput error">Error using algoritmo_di_bisezione (line 58)
-Nessun valore in ingresso
 </pre><h2 id="27">Inizializzazione delle variabili</h2><pre class="codeinput">niter = 0;
 a=x0(1);
 b=x0(2);
@@ -145,11 +143,9 @@ x=c;
     ax.XAxisLocation = <span class="string">'origin'</span>;
     ax.YAxisLocation = <span class="string">'origin'</span>;
     box <span class="string">off</span>
-    <span class="comment">%RAFFAELE : una volta stampato il grafico effettuo un hold off per attivare</span>
-    <span class="comment">%l'altro grafico del calcolo in Valuta_Performance</span>
     hold <span class="string">off</span>
 <span class="keyword">end</span>
-</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Algoritmo di Bisezione
 
@@ -174,27 +170,27 @@ x=c;
 %%
 % [x uscita graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
 %% Parametri di Input
-% -*_f_* = funzione di cui calcolare lo zero (espressa come function handle)
+% - *_f_* = funzione di cui calcolare lo zero (espressa come function handle)
 %%
-% -*_x0_* = Intervallo iniziale (espresso con un vettore con estremi
+% - *_x0_* = Intervallo iniziale (espresso con un vettore con estremi
 % differenti
 %%
-% -*_TOL_* = facoltativo, accuratezza richiesta dall'utente, se omesso
+% - *_TOL_* = facoltativo, accuratezza richiesta dall'utente, se omesso
 % viene posto pari a eps
 %%
-% -*_NMAX_* = facoltativo, numero massimo di iterazioni, se omesso
+% - *_NMAX_* = facoltativo, numero massimo di iterazioni, se omesso
 % NMAX=500
 %%
 %% Parametri di Output
-% -*_x_* = valore dell'approssimazione dello zero della funzione
+% - *_x_* = valore dell'approssimazione dello zero della funzione
 %%
-% -*_output_* = facoltativo,struttura con 2 campi:
+% - *_output_* = facoltativo,struttura con 2 campi:
 %%
 % - *_fx_* valore della funzione in *_x_*
 %%
 % - *_niter_* numero di iterazioni
 %%
-% -*_graf_* = facoltativo, variabile di tipo carattere, fa il grafico della
+% - *_graf_* = facoltativo, variabile di tipo carattere, fa il grafico della
 % funzione e dello zero trovato
 %%
 
@@ -290,8 +286,6 @@ elseif(nargout==3)
     ax.XAxisLocation = 'origin';
     ax.YAxisLocation = 'origin';
     box off
-    %RAFFAELE : una volta stampato il grafico effettuo un hold off per attivare
-    %l'altro grafico del calcolo in Valuta_Performance
     hold off
 end
 
