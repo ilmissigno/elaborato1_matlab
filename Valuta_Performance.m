@@ -29,8 +29,8 @@ end
 end 
     
  %inizializzazione delle variabil contenenti i risultati
-RisultatiBisezione = zeros(1,10);
-RisultatiFzero = zeros(1,10);
+RisultatiBisezione = zeros(1,14);
+RisultatiFzero = zeros(1,14);
 
 for i = 1:14
         [~, uscita,~] = algoritmo_di_bisezione(f,x0,TOL(i),NMAX);

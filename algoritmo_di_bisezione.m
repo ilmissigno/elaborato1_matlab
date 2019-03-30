@@ -65,19 +65,20 @@ if(x0(1)==x0(2))
     %inserito verifica intervallo
     errordlg('Valori di a e b uguali','Errore');
    error('valori dell intervallo uguali');
-     
-else
-    if(nargin==3)
+end
+if (nargin>=3)
   controllo_TOL(TOL);
                    
-    else TOL=eps;
+    else
+        warning('settato eps');
+        TOL=eps;
     end
     if(nargin==4)
         
   controllo_NMAX(NMAX);
     else NMAX=500;
     end
-end 
+
 
 %% Inizializzazione delle variabili 
 niter = 0;
