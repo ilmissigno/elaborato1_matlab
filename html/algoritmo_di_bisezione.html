@@ -1,0 +1,299 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Algoritmo di Bisezione</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-30"><meta name="DC.source" content="algoritmo_di_bisezione.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Algoritmo di Bisezione</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Scopo</a></li><li><a href="#2">Sintassi</a></li><li><a href="#11">Parametri di Input</a></li><li><a href="#16">Parametri di Output</a></li><li><a href="#22">Descrizione</a></li><li><a href="#24">Firma della funzione</a></li><li><a href="#26">Controllo dei parametri di ingresso</a></li><li><a href="#27">Inizializzazione delle variabili</a></li><li><a href="#28">Controllo il valore agli estremi dell'intervallo</a></li><li><a href="#29">Controllo il soddisfacimento del teorema degli zeri</a></li><li><a href="#30">Parte iterativa ai fini della soluzione del problema</a></li><li><a href="#32">Controllo sui parametri di uscita ed eventuale creazione del grafico di output</a></li></ul></div><h2 id="1">Scopo</h2><p>Data una generica funzione f in un intervallo [a,b]. L'algoritmo di bisezione calcola approssimativamente un  punto in cui f(x)=0.</p><h2 id="2">Sintassi</h2><p>x = algoritmo_di_bisezione(f,x0)</p><p>x = algoritmo_di_bisezione(f,x0,TOL);</p><p>x = algoritmo_di_bisezione(f,x0,TOL,NMAX);</p><p>[x uscita] = algoritmo_di_bisezione(f,x0);</p><p>[x uscita] = algoritmo_di_bisezione(f,x0,TOL);</p><p>[x uscita] = algoritmo_di_bisezione(f,x0,TOL,NMAX);</p><p>[x uscita graf] = algoritmo_di_bisezione(f,x0);</p><p>[x uscita graf] = algoritmo_di_bisezione(f,x0,TOL);</p><p>[x uscita graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);</p><h2 id="11">Parametri di Input</h2><p>-*_f_* = funzione di cui calcolare lo zero (espressa come function handle)</p><p>-*_x0_* = Intervallo iniziale (espresso con un vettore con estremi differenti</p><p>-*_TOL_* = facoltativo, accuratezza richiesta dall'utente, se omesso viene posto pari a eps</p><p>-*_NMAX_* = facoltativo, numero massimo di iterazioni, se omesso NMAX=500</p><h2 id="16">Parametri di Output</h2><p>-*_x_* = valore dell'approssimazione dello zero della funzione</p><p>-*_output_* = facoltativo,struttura con 2 campi:</p><p>- <b><i>fx</i></b> valore della funzione in <b><i>x</i></b></p><p>- <b><i>niter</i></b> numero di iterazioni</p><p>-*_graf_* = facoltativo, variabile di tipo carattere, fa il grafico della funzione e dello zero trovato</p><h2 id="22">Descrizione</h2><p>L'algoritmo di Bisezione riceve obbligatoriamente in ingresso la funzione e l'intervallo altrimenti si arresta.Opzionalmente se l'utente &egrave; esperto pu&ograve; inserire i valori TOL ed NMAX.</p><h2 id="24">Firma della funzione</h2><pre class="codeinput"><span class="keyword">function</span> [X,result,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
+</pre><h2 id="26">Controllo dei parametri di ingresso</h2><pre class="codeinput"><span class="keyword">if</span>(nargin==0)
+    error(<span class="string">'Nessun valore in ingresso'</span>);
+<span class="keyword">end</span>
+<span class="comment">%Se inserisco un solo valore (funzione soltanto)</span>
+<span class="keyword">if</span>(nargin==1)
+    error(<span class="string">'Inserire intervallo assieme alla funzione'</span>);
+<span class="keyword">end</span>
+<span class="keyword">if</span>(x0(1)==x0(2))
+    <span class="comment">%inserito verifica intervallo</span>
+    errordlg(<span class="string">'Valori di a e b uguali'</span>,<span class="string">'Errore'</span>);
+   error(<span class="string">'valori dell intervallo uguali'</span>);
+
+<span class="keyword">else</span>
+    <span class="keyword">if</span>(nargin==3)
+  controllo_TOL(TOL);
+
+    <span class="keyword">else</span> TOL=eps;
+    <span class="keyword">end</span>
+    <span class="keyword">if</span>(nargin==4)
+
+  controllo_NMAX(NMAX);
+    <span class="keyword">else</span> NMAX=500;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><pre class="codeoutput error">Error using algoritmo_di_bisezione (line 58)
+Nessun valore in ingresso
+</pre><h2 id="27">Inizializzazione delle variabili</h2><pre class="codeinput">niter = 0;
+a=x0(1);
+b=x0(2);
+c = (a+b)/2;
+fa = f(a);
+fb = f(b);
+fc = f(c);
+x=c;
+</pre><h2 id="28">Controllo il valore agli estremi dell'intervallo</h2><pre class="codeinput"><span class="keyword">if</span>(abs(fa)&lt;eps)
+    x=a;
+    fc=f(a);
+<span class="keyword">end</span>
+<span class="keyword">if</span>(abs(fb)&lt;eps)
+    x=b;
+    fc=f(b);
+<span class="keyword">else</span>
+</pre><h2 id="29">Controllo il soddisfacimento del teorema degli zeri</h2><pre class="codeinput">    <span class="keyword">if</span>(fa*fb&gt;0)
+        errordlg(<span class="string">'La funzione non ha zeri nell intervallo specificato'</span>,<span class="string">'Errore'</span>);
+        error(<span class="string">'La funzione non ha zeri nell intervallo specificato'</span>);
+    <span class="keyword">end</span>
+</pre><h2 id="30">Parte iterativa ai fini della soluzione del problema</h2><pre class="codeinput">    <span class="keyword">while</span>((abs(b-a))&gt;=(TOL*max(abs(a),abs(b))) &amp;&amp; abs(fc)&gt;=eps &amp;&amp; niter&lt;NMAX)
+        niter = niter + 1;
+        <span class="keyword">if</span>((fa*fc)&lt;0)
+            b=c;
+            fb=fc;
+        <span class="keyword">else</span>
+            a=c;
+            fa=fc;
+        <span class="keyword">end</span>
+        c=(a+b)/2;
+        fc = f(c);
+        x=c;
+    <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><h2 id="32">Controllo sui parametri di uscita ed eventuale creazione del grafico di output</h2><pre class="codeinput"><span class="keyword">if</span>(nargout==1)
+   X = x;
+<span class="keyword">elseif</span>(nargout==2)
+    X = x;
+    result.fx = fc;
+    result.numiter = niter;
+<span class="keyword">elseif</span>(nargout==3)
+    X = x;
+    result.fx = fc;
+    result.numiter = niter;
+    inter = -1:0.001:5;
+    graf = plot(inter,f(inter));
+    hold <span class="string">on</span>
+    plot(X,f(X),<span class="string">'ro'</span>);
+    ax = gca;
+    ax.XAxisLocation = <span class="string">'origin'</span>;
+    ax.YAxisLocation = <span class="string">'origin'</span>;
+    box <span class="string">off</span>
+    <span class="comment">%RAFFAELE : una volta stampato il grafico effettuo un hold off per attivare</span>
+    <span class="comment">%l'altro grafico del calcolo in Valuta_Performance</span>
+    hold <span class="string">off</span>
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Algoritmo di Bisezione
+
+%% Scopo
+% Data una generica funzione f in un intervallo [a,b]. L'algoritmo di bisezione calcola approssimativamente un  punto in cui f(x)=0.
+%% Sintassi
+% x = algoritmo_di_bisezione(f,x0)
+%%
+% x = algoritmo_di_bisezione(f,x0,TOL);
+%%
+% x = algoritmo_di_bisezione(f,x0,TOL,NMAX);
+%%
+% [x uscita] = algoritmo_di_bisezione(f,x0);
+%%
+% [x uscita] = algoritmo_di_bisezione(f,x0,TOL);
+%%
+% [x uscita] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
+%%
+% [x uscita graf] = algoritmo_di_bisezione(f,x0);
+%%
+% [x uscita graf] = algoritmo_di_bisezione(f,x0,TOL);
+%%
+% [x uscita graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
+%% Parametri di Input
+% -*_f_* = funzione di cui calcolare lo zero (espressa come function handle)
+%%
+% -*_x0_* = Intervallo iniziale (espresso con un vettore con estremi
+% differenti
+%%
+% -*_TOL_* = facoltativo, accuratezza richiesta dall'utente, se omesso
+% viene posto pari a eps
+%%
+% -*_NMAX_* = facoltativo, numero massimo di iterazioni, se omesso
+% NMAX=500
+%%
+%% Parametri di Output
+% -*_x_* = valore dell'approssimazione dello zero della funzione
+%%
+% -*_output_* = facoltativo,struttura con 2 campi:
+%%
+% - *_fx_* valore della funzione in *_x_*
+%%
+% - *_niter_* numero di iterazioni
+%%
+% -*_graf_* = facoltativo, variabile di tipo carattere, fa il grafico della
+% funzione e dello zero trovato
+%%
+
+%% Descrizione
+% L'algoritmo di Bisezione riceve obbligatoriamente in ingresso la funzione e l'intervallo altrimenti si arresta.Opzionalmente se l'utente è esperto può inserire i valori TOL ed NMAX.
+%%
+
+%% Firma della funzione
+
+function [X,result,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
+
+%% Controllo dei parametri di ingresso
+if(nargin==0)
+    error('Nessun valore in ingresso');
+end
+%Se inserisco un solo valore (funzione soltanto)
+if(nargin==1)
+    error('Inserire intervallo assieme alla funzione');
+end
+if(x0(1)==x0(2))
+    %inserito verifica intervallo
+    errordlg('Valori di a e b uguali','Errore');
+   error('valori dell intervallo uguali');
+     
+else
+    if(nargin==3)
+  controllo_TOL(TOL);
+                   
+    else TOL=eps;
+    end
+    if(nargin==4)
+        
+  controllo_NMAX(NMAX);
+    else NMAX=500;
+    end
+end 
+
+%% Inizializzazione delle variabili 
+niter = 0;
+a=x0(1);
+b=x0(2);
+c = (a+b)/2;
+fa = f(a);
+fb = f(b);
+fc = f(c);
+x=c;
+%% Controllo il valore agli estremi dell'intervallo
+if(abs(fa)<eps)
+    x=a;
+    fc=f(a);
+end
+if(abs(fb)<eps)
+    x=b;
+    fc=f(b);
+else
+%% Controllo il soddisfacimento del teorema degli zeri
+    if(fa*fb>0)
+        errordlg('La funzione non ha zeri nell intervallo specificato','Errore');
+        error('La funzione non ha zeri nell intervallo specificato');
+    end
+ %% Parte iterativa ai fini della soluzione del problema
+    while((abs(b-a))>=(TOL*max(abs(a),abs(b))) && abs(fc)>=eps && niter<NMAX)
+        niter = niter + 1;
+        if((fa*fc)<0)
+            b=c;
+            fb=fc;
+        else
+            a=c;
+            fa=fc;
+        end
+        c=(a+b)/2;
+        fc = f(c);
+        x=c;
+    end
+end
+%% Controllo sui parametri di uscita ed eventuale creazione del grafico di output
+
+if(nargout==1)
+   X = x;
+elseif(nargout==2)
+    X = x;
+    result.fx = fc;
+    result.numiter = niter;
+elseif(nargout==3)
+    X = x;
+    result.fx = fc;
+    result.numiter = niter;
+    inter = -1:0.001:5;
+    graf = plot(inter,f(inter));
+    hold on
+    plot(X,f(X),'ro');
+    ax = gca;
+    ax.XAxisLocation = 'origin';
+    ax.YAxisLocation = 'origin';
+    box off
+    %RAFFAELE : una volta stampato il grafico effettuo un hold off per attivare
+    %l'altro grafico del calcolo in Valuta_Performance
+    hold off
+end
+
+##### SOURCE END #####
+--></body></html>
