@@ -1,8 +1,32 @@
 function Valuta_Performance(f,x0,TOL,NMAX)
-% Valuta_Performance stampa su un istogramma i risultati, sull'asse delle ordinate 
+% Valuta_Performance stampa su un grafico i risultati, sull'asse delle ordinate 
 %troviamo il numero di iteazioni relativi alle funzioni fzero e algoritmo_di_bisezione,
 % per diversi valori di tolleranza rappresentati sull'asse delle ascisse.
   
+%% Controllo dei parametri di ingresso
+if(nargin==0)
+    error('Nessun valore in ingresso');
+end
+%Se inserisco un solo valore (funzione soltanto)
+if(nargin==1)
+    error('Inserire intervallo assieme alla funzione');
+end
+if(x0(1)==x0(2))
+    %inserito verifica intervallo
+    errordlg('Valori di a e b uguali','Errore');
+   error('valori dell intervallo uguali');
+     
+else
+    if(nargin<3)
+  error('Inserire i valori di tolleranza!');
+end
+                   
+    if(nargin==4)
+        
+  controllo_NMAX(NMAX);
+    else NMAX=500;
+    end
+end 
     
  %inizializzazione delle variabil contenenti i risultati
 RisultatiBisezione = zeros(1,10);
