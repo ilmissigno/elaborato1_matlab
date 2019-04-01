@@ -24,21 +24,18 @@ classdef Test1 < matlab.unittest.TestCase
              
             
               function TestCase2(testCase)
-           %verifica l'errore nel caso in cui il primo estremo dell'intervallo inserito
-           %è un carattere
+           %verifica l'errore nel caso in cui il valore della funz inserito
+           %non è valido
           
            [f,x0] = Richiama_Parametri();
-             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
+             [x, uscita, graf]= algoritmo_di_bisezione(f,x0);
             %testa l'errore
-            if(ischar(x0(1)) || ischar(x0(2)))
-                verifyTrue(testCase,true);
-            else 
-                verifyFalse(testCase,false);
-            end
-            
+            verifyEqual(testCase,0,uscita.fx,'soluzione uguali');
             %import matlab.unittest.constraints.IsEmpty
            
+            %x0 = testCase.TestFigure.CurrentObject;
             
+             
              end
         
         
