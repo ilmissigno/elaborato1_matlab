@@ -242,12 +242,12 @@ else
 end
 x0 = [vala valb];
 funz=inline(funz);
+
 [x, uscita , graf] = algoritmo_di_bisezione(funz,x0,toll,nummax);
 acc = CalcoloAccuratezza(funz,x0,toll,nummax);
-acc
-testo = sprintf('Valore del punto x = %f',x);
-testo = sprintf('%s\nValore di f(x) = %f',testo,uscita.fx);
-testo = sprintf('%s\nValore di accuratezza = %s',testo,num2stacc);
+testo = sprintf('Valore del punto x = %.16e',x);
+testo = sprintf('%s\nValore di f(x) = %s',testo,num2str(uscita.fx));
+testo = sprintf('%s\nValore di accuratezza = %.16e',testo,acc);
 set(handles.ris,'String',testo);
 
 % --- Executes on button press in btnCheckfzero.

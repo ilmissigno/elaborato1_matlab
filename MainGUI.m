@@ -242,7 +242,13 @@ else
 end
 x0 = [vala valb];
 funz=inline(funz);
-[x, uscita , graf] = algoritmo_di_bisezione(funz,x0,toll,nummax);
+answer = questdlg('Vuoi visualizzare il grafico della funzione?','Visualizza Grafico','Si','No','No');
+switch answer
+    case 'Si'
+        [x, uscita , graf] = algoritmo_di_bisezione(funz,x0,toll,nummax);
+    case 'No'
+        [x, uscita] = algoritmo_di_bisezione(funz,x0,toll,nummax);
+end
 acc = CalcoloAccuratezza(funz,x0,toll,nummax);
 testo = sprintf('Valore del punto x = %.16e',x);
 testo = sprintf('%s\nValore di f(x) = %s',testo,num2str(uscita.fx));
