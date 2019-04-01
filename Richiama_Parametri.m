@@ -4,6 +4,6 @@ function [f,x0] = Richiama_Parametri()
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
 f = @(x) 2-exp(-x)-sqrt(x);
-x0 =[0 4];
+x0 =[0  4];
 end
 

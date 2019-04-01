@@ -15,29 +15,70 @@ classdef Test1 < matlab.unittest.TestCase
              [x, uscita, graf]= algoritmo_di_bisezione(f,x0);
             %testa l'errore
             verifyEqual(testCase,0,uscita.fx,'soluzione uguali');
-            %import matlab.unittest.constraints.IsEmpty
-           
-            %x0 = testCase.TestFigure.CurrentObject;
             
              
             end
              
             
               function TestCase2(testCase)
-           %verifica l'errore nel caso in cui il valore della funz inserito
-           %non è valido
+           %verifica l'errore nel caso in cui il primo estremo dell'intervallo inserito
+           %non è un numero
           
            [f,x0] = Richiama_Parametri();
-             [x, uscita, graf]= algoritmo_di_bisezione(f,x0);
+             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
             %testa l'errore
-            verifyEqual(testCase,0,uscita.fx,'soluzione uguali');
-            %import matlab.unittest.constraints.IsEmpty
-           
-            %x0 = testCase.TestFigure.CurrentObject;
+            if(isnumeric(x0(1)) || isnumeric(x0(2)))
+                verifyReturnsTrue(testCase,@false);
+            else 
+                verifyReturnsTrue(testCase,@true);
+            end
             
-             
-             end
+              end
         
+             
+            function TestCase3(testCase)
+           %verifica l'errore nel caso in cui entrambi i valori
+           %dell'intervallo sono vuoti
+          
+           [f,x0] = Richiama_Parametri();
+             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
+            %testa l'errore
+            if(isempty(x0(1)) && isempty(x0(2)))
+                verifyReturnsTrue(testCase,@false);
+            else 
+                verifyReturnsTrue(testCase,@true);
+            end
+            
+            end  
+             
+            
+            
+       function TestCase4(testCase)
+           %verifica l'errore nel caso in cui entrambi i valori
+           %dell'intervallo sono uguali
+          
+           [f,x0] = Richiama_Parametri();
+             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
+            %testa l'errore
+            verifyNotEqual(testCase,x0(1),x0(2));
+            
+       end       
+        
+       
+       function TestCase5(testCase)
+           %verifica l'errore nel caso in cui i valori dell'intervallo non
+           %sono validi
+          
+           [f,x0] = Richiama_Parametri();
+             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
+            %testa l'errore
+            if(length(x0)~=2)
+                verifyReturnsTrue(testCase,@false);
+            else 
+                verifyReturnsTrue(testCase,@true);
+            end
+            
+        end 
         
     end
 end
