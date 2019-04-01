@@ -12,6 +12,9 @@ NMAX = 1001;
 %   Detailed explanation goes here
 f = @(x) 2-exp(-x)-sqrt(x);
 x0 =[0  4];
+<<<<<<< HEAD
+>>>>>>> 658d310be29248f256111908c6277dfa1f4fd420
+=======
 >>>>>>> 658d310be29248f256111908c6277dfa1f4fd420
 end
 

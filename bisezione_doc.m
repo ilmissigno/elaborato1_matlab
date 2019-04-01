@@ -51,6 +51,7 @@
 % L'algoritmo di Bisezione riceve in ingresso la funzione e l'intervallo in
 % cui deve calcolare il valore di annullamento della stessa.
 <<<<<<< HEAD
+<<<<<<< HEAD
 %{
 format long e
 f = @(x) 2-exp(-x)-sqrt(x);
@@ -62,6 +63,8 @@ accuratezza=CalcoloAccuratezza(f,x0,TOL,NMAX);
 TOL=[10^-1 10^-2 10^-3  10^-4 10^-5 10^-6 10^-7 10^-8 10^-9 10^-10 10^-12 10^-13 10^-14 eps];
 %}
 =======
+=======
+>>>>>>> 658d310be29248f256111908c6277dfa1f4fd420
 
 
 
@@ -76,6 +79,9 @@ TOL=[10^-1 10^-2 10^-3  10^-4 10^-5 10^-6 10^-7 10^-8 10^-9 10^-10 10^-12 10^-13
 
 
 
+<<<<<<< HEAD
+>>>>>>> 658d310be29248f256111908c6277dfa1f4fd420
+=======
 >>>>>>> 658d310be29248f256111908c6277dfa1f4fd420
 %funzione che valuta la performance dei due approcci per le varie Tol
 % affichè funzioni si deve commentare o eliminare hold on del grafo precedente
