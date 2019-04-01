@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 classdef Test1 < matlab.unittest.TestCase
     %UNTITLED Summary of this class goes here
     %   Detailed explanation goes here
@@ -103,4 +101,3 @@ classdef Test1 < matlab.unittest.TestCase
 end
 
 
->>>>>>> 658d310be29248f256111908c6277dfa1f4fd420
