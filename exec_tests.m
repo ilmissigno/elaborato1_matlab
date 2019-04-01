@@ -1,24 +1,10 @@
-classdef Test1 < matlab.unittest.TestCase
+classdef exec_tests < matlab.unittest.TestCase
     %UNTITLED Summary of this class goes here
     %   Detailed explanation goes here
     
    
    
-    methods(Test)
-        
-       
-            function TestCase1(testCase)
-           %verifica l'errore nel caso in cui le soluzioni dell'algoritmo
-           %sono uguali
-          
-           [f,x0] = Richiama_Parametri();
-             [x, uscita, graf]= algoritmo_di_bisezione(f,x0);
-            %testa l'errore
-            verifyEqual(testCase,0,uscita.fx,'soluzione uguali');
-            
-             
-            end
-             
+    methods(Test) 
             
               function TestCase2(testCase)
            %verifica l'errore nel caso in cui il primo estremo o il secondo estremo dell'intervallo inserito
@@ -193,8 +179,8 @@ classdef Test1 < matlab.unittest.TestCase
            end
            
            function TestCase15(testCase)
-               %Caso 14 : Verifica se il valore di NMAX 
-               %è minore o uguale a 2
+               %Caso 15 : Verifica se il valore di NMAX 
+               %è maggiore o uguale a 1000
                %Richiamo i parametri
                 [~,~,~,NMAX] = Richiama_Parametri();
                 if(NMAX>=1000)
