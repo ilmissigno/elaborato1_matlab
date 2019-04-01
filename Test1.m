@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 classdef Test1 < matlab.unittest.TestCase
     %UNTITLED Summary of this class goes here
     %   Detailed explanation goes here
@@ -97,10 +95,116 @@ classdef Test1 < matlab.unittest.TestCase
                 verifyReturnsTrue(testCase,@true);
             end
             
-              end
+       end
         
+         function TestCase7(testCase)
+            %verifica se l'accuratezza è adeguata con TOL=eps
+            [f,x0] = Richiama_Parametri();
+            [x, uscita, graf]= algoritmo_di_bisezione(f,x0);
+            actSolution=x;
+            expSolution= fzero(f,x0);
+            abs_error = abs(actSolution - expSolution)/abs(expSolution);
+            %assert(isequal(actSolution,expSolution));
+            verifyLessThan(testCase,abs_error,eps*max(actSolution,expSolution),'Risultato poco accurato');
+            
+         end
+        
+        function TestCase8(testCase)
+            %verifica se l'accuratezza è adeguata con TOL inserito da Utente
+            [f,x0,TOL] = Richiama_Parametri();
+            [x, uscita, graf]= algoritmo_di_bisezione(f,x0,TOL);
+            actSolution=x;
+            options = optimset('TolX',TOL);
+            expSolution=fzero(f,x0,options);
+            abs_error = abs(actSolution - expSolution)/abs(expSolution);
+            %assert(isequal(actSolution,expSolution));
+            verifyLessThan(testCase,abs_error,eps*max(actSolution,expSolution),'Risultato poco accurato');
+            
+        end
+        
+        function TestCase9(testCase)
+            %Il test non passa se la tolleranza non è inserita dall'utente
+            [f,x0,TOL] = Richiama_Parametri();
+            
+            %assert(isequal(actSolution,expSolution));
+            verifyNotEmpty(testCase,TOL);
+            
+        end
+        
+       
+       
+       
+              function TestCase10(testCase)
+           %Caso 10 : Verifica se la funzione è Handle
+           %Richiamo i parametri
+            [f,~,~,~] = Richiama_Parametri();
+           %testa l'errore
+                if(isa(f,'function_handle'))
+                   %passato
+                    verifyReturnsTrue(testCase,@true);
+                else
+                    %non passato
+                    verifyReturnsTrue(testCase,@false);
+                end
+           end
+           
+           function TestCase11(testCase)
+               %Caso 11 : Verifica se la funzione non è presente
+               %Richiamo i parametri
+                [f,~,~,~] = Richiama_Parametri();
+                verifyNotEmpty(testCase,f);
+           end
+           
+           function TestCase12(testCase)
+               %Caso 12 : Verifica se il valore di NMAX 
+               %non è numerico, non è scalare, è infinito
+               %oppure è NaN
+               %Richiamo i parametri
+                [~,~,~,NMAX] = Richiama_Parametri();
+                if(~isscalar(NMAX) || ~isnumeric(NMAX) || isinf(NMAX) || isnan(NMAX))
+                    verifyReturnsTrue(testCase,@false)
+                else
+                    verifyReturnsTrue(testCase,@true)
+                end
+           end
+           
+           function TestCase13(testCase)
+               %Caso 13 : Verifica se il valore di NMAX 
+               %è minore o uguale a 0
+               %Richiamo i parametri
+                [~,~,~,NMAX] = Richiama_Parametri();
+                if(NMAX<=0)
+                    verifyReturnsTrue(testCase,@false)
+                else
+                    verifyReturnsTrue(testCase,@true)
+                end
+           end
+           
+           function TestCase14(testCase)
+               %Caso 14 : Verifica se il valore di NMAX 
+               %è minore o uguale a 2
+               %Richiamo i parametri
+                [~,~,~,NMAX] = Richiama_Parametri();
+                if(NMAX<=2)
+                    verifyReturnsTrue(testCase,@false)
+                else
+                    verifyReturnsTrue(testCase,@true)
+                end
+           end
+           
+           function TestCase15(testCase)
+               %Caso 14 : Verifica se il valore di NMAX 
+               %è minore o uguale a 2
+               %Richiamo i parametri
+                [~,~,~,NMAX] = Richiama_Parametri();
+                if(NMAX>=1000)
+                    warning('Il numero di iterazioni inserito è molto alto, l''esecuzione potrebbe essere più lenta'); 
+                    verifyReturnsTrue(testCase,@false)
+                else
+                    verifyReturnsTrue(testCase,@true)
+                end
+           end
     end
 end
 
 
->>>>>>> 658d310be29248f256111908c6277dfa1f4fd420
