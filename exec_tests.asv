@@ -194,28 +194,26 @@ classdef exec_tests < matlab.unittest.TestCase
             %minore di eps
             [f,x0,TOL] = Richiama_Parametri();
             
-           if(TOL < eps)
+           if(TOL < 0)
               verifyReturnsTrue(testCase,@false) 
            else
                verifyReturnsTrue(testCase,@true)
            end
             
             end
-            
-           function TestCase17(testCase)
-            %Il test non passa se la tolleranza inserita dall'utente non è
-            %un numero
+        
+            function TestCase17(testCase)
+            %Il test non passa se la tolleranza inserita dall'utente è
+            %compresa da
             [f,x0,TOL] = Richiama_Parametri();
             
-           if(~isscalar(TOL) || ~isnumeric(TOL) || isinf(TOL) || isnan(TOL) )
+           if(TOL>0 && TOL<eps)
               verifyReturnsTrue(testCase,@false) 
            else
-               verifyReturnsTrue(testCase,@true)
+               verifyReturnsTrue(testCase,@false)
            end
             
-            end 
-        
-            
+        end
     end
 end
 
