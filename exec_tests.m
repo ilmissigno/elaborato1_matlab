@@ -1,6 +1,4 @@
 classdef exec_tests < matlab.unittest.TestCase
-    %UNTITLED Summary of this class goes here
-    %   Detailed explanation goes here
     
    
    
@@ -8,7 +6,7 @@ classdef exec_tests < matlab.unittest.TestCase
             
               function TestCase2(testCase)
            %verifica l'errore nel caso in cui il primo estremo o il secondo estremo dell'intervallo inserito
-           %non è un numero
+           %non ï¿½ un numero
           
            [f,x0] = Richiama_Parametri();
              %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
@@ -53,7 +51,7 @@ classdef exec_tests < matlab.unittest.TestCase
        
        function TestCase5(testCase)
            %verifica l'errore nel caso in cui i valori dell'intervallo non
-           %sono validi, poichè o inseriamo un numero di elementi diverso
+           %sono validi, poichï¿½ o inseriamo un numero di elementi diverso
            %da 2 come lunghezza dell'intervallo
           
            [f,x0] = Richiama_Parametri();
@@ -69,7 +67,7 @@ classdef exec_tests < matlab.unittest.TestCase
         
        
        function TestCase6(testCase)
-           %verifica l'errore nel caso in cui non è soddisfatto il teorema
+           %verifica l'errore nel caso in cui non ï¿½ soddisfatto il teorema
            %degli zeri
           
            [f,x0] = Richiama_Parametri();
@@ -84,7 +82,7 @@ classdef exec_tests < matlab.unittest.TestCase
        end
         
          function TestCase7(testCase)
-            %verifica se l'accuratezza è adeguata con TOL=eps
+            %verifica se l'accuratezza ï¿½ adeguata con TOL=eps
             [f,x0] = Richiama_Parametri();
             [x, uscita, graf]= algoritmo_di_bisezione(f,x0);
             actSolution=x;
@@ -96,7 +94,7 @@ classdef exec_tests < matlab.unittest.TestCase
          end
         
         function TestCase8(testCase)
-            %verifica se l'accuratezza è adeguata con TOL inserito da Utente
+            %verifica se l'accuratezza ï¿½ adeguata con TOL inserito da Utente
             [f,x0,TOL] = Richiama_Parametri();
             [x, uscita, graf]= algoritmo_di_bisezione(f,x0,TOL);
             actSolution=x;
@@ -109,7 +107,7 @@ classdef exec_tests < matlab.unittest.TestCase
         end
         
         function TestCase9(testCase)
-            %Il test non passa se la tolleranza non è inserita dall'utente
+            %Il test non passa se la tolleranza non ï¿½ inserita dall'utente
             [f,x0,TOL] = Richiama_Parametri();
             
             %assert(isequal(actSolution,expSolution));
@@ -121,7 +119,7 @@ classdef exec_tests < matlab.unittest.TestCase
        
        
               function TestCase10(testCase)
-           %Caso 10 : Verifica se la funzione è Handle
+           %Caso 10 : Verifica se la funzione ï¿½ Handle
            %Richiamo i parametri
             [f,~,~,~] = Richiama_Parametri();
            %testa l'errore
@@ -135,7 +133,7 @@ classdef exec_tests < matlab.unittest.TestCase
            end
            
            function TestCase11(testCase)
-               %Caso 11 : Verifica se la funzione non è presente
+               %Caso 11 : Verifica se la funzione non ï¿½ presente
                %Richiamo i parametri
                 [f,~,~,~] = Richiama_Parametri();
                 verifyNotEmpty(testCase,f);
@@ -143,8 +141,8 @@ classdef exec_tests < matlab.unittest.TestCase
            
            function TestCase12(testCase)
                %Caso 12 : Verifica se il valore di NMAX 
-               %non è numerico, non è scalare, è infinito
-               %oppure è NaN
+               %non ï¿½ numerico, non ï¿½ scalare, ï¿½ infinito
+               %oppure ï¿½ NaN
                %Richiamo i parametri
                 [~,~,~,NMAX] = Richiama_Parametri();
                 if(~isscalar(NMAX) || ~isnumeric(NMAX) || isinf(NMAX) || isnan(NMAX))
@@ -156,7 +154,7 @@ classdef exec_tests < matlab.unittest.TestCase
            
            function TestCase13(testCase)
                %Caso 13 : Verifica se il valore di NMAX 
-               %è minore o uguale a 0
+               %ï¿½ minore o uguale a 0
                %Richiamo i parametri
                 [~,~,~,NMAX] = Richiama_Parametri();
                 if(NMAX<=0)
@@ -168,7 +166,7 @@ classdef exec_tests < matlab.unittest.TestCase
            
            function TestCase14(testCase)
                %Caso 14 : Verifica se il valore di NMAX 
-               %è minore o uguale a 2
+               %ï¿½ minore o uguale a 2
                %Richiamo i parametri
                 [~,~,~,NMAX] = Richiama_Parametri();
                 if(NMAX<=2)
@@ -180,11 +178,11 @@ classdef exec_tests < matlab.unittest.TestCase
            
            function TestCase15(testCase)
                %Caso 15 : Verifica se il valore di NMAX 
-               %è maggiore o uguale a 1000
+               %ï¿½ maggiore o uguale a 1000
                %Richiamo i parametri
                 [~,~,~,NMAX] = Richiama_Parametri();
                 if(NMAX>=1000)
-                    warning('Il numero di iterazioni inserito è molto alto, l''esecuzione potrebbe essere più lenta'); 
+                    warning('Il numero di iterazioni inserito ï¿½ molto alto, l''esecuzione potrebbe essere piï¿½ lenta'); 
                     verifyReturnsTrue(testCase,@false)
                 else
                     verifyReturnsTrue(testCase,@true)
