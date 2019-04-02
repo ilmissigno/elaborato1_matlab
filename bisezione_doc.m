@@ -52,15 +52,19 @@
 % cui deve calcolare il valore di annullamento della stessa.
 
 format long e
-f = @(x) 2-exp(-x)-sqrt(x);
-x0 = [0 4];
-TOL = 10^-15;
-NMAX = 1000;
-[x, uscita, graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
-accuratezza=CalcoloAccuratezza(f,x0,TOL,NMAX);
-TOL=[10^-1 10^-2 10^-3  10^-4 10^-5 10^-6 10^-7 10^-8 10^-9 10^-10 10^-12 10^-13 10^-14 eps];
+%f = @(x) 2-exp(-x)-sqrt(x);
+f=@(x) x.^2 -4;
+x0 = ['a' 10];
+TOL = 10;
+NMAX = 2;
+%[x, uscita, graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
+%accuratezza=CalcoloAccuratezza(f,x0,TOL,NMAX);
+%TOL=[10^-1 10^-2 10^-3  10^-4 10^-5 10^-6 10^-7 10^-8 10^-9 10^-10 10^-12 10^-13 10^-14 eps];
 %funzione che valuta la performance dei due approcci per le varie Tol
 % affichè funzioni si deve commentare o eliminare hold on del grafo precedente
-Valuta_Performance(f,x0,TOL,NMAX);
-result1 = runtests('exec_tests.m');
+%Valuta_Performance(f,x0,TOL,NMAX);
+%result1 = runtests('exec_tests.m');
+%table(result1)
+test=exec_tests(f,x0,TOL,NMAX);
+result1 = run(test);
 table(result1)
