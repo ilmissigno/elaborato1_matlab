@@ -3,7 +3,7 @@ function controllo_NMAX(NMAX)
 
 
     % Verifico che NMAX sia un intero positivo
-        if ~isscalar(NMAX) || ~isnumeric(NMAX) || isinf(NMAX) || isnan(NMAX) || NMAX <= 0 %|| mod(NMAX,1) == 0
+        if ~isscalar(NMAX) || ~isnumeric(NMAX) || isinf(NMAX) || isnan(NMAX) || NMAX <= 0 
               errordlg('NMAX deve essere un numero intero positivo','Errore');
               error('NMAX deve essere un numero intero positivo');
         end

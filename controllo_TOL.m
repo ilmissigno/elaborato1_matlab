@@ -17,6 +17,5 @@ function controllo_TOL(TOL)
             errordlg('TOL non puo essere minore di zero.','Errore');
             error('TOL non puo essere minore di zero.');
        end
-       %TOLF = eps;
    end
 
