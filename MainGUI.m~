@@ -149,7 +149,15 @@ testo = sprintf('%s\nValore di accuratezza = %.16e',testo,acc);
 set(handles.ris,'String',testo);
 
 function btnCheckfzero_Callback(hObject, eventdata, handles)
-
+% hObject    handle to btnCheckfzero (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+%RAFFAELE : Definita funzione di Verifica con fzero non appena si clicca
+%sul pulsante Confronta con fzero (risolto problema dei grafici
+%sovrapposti)
+%RAFFAELE : Aggiunti controlli sui campi ,mostro un messaggio di errore 
+%nel caso di funzione o intervallo non immesso o di warning per
+%tol = eps e nmax=500 valori di default
 funz = get(handles.fun, 'String');
 vala = get(handles.val_a, 'String');
 valb = get(handles.val_b, 'String');
@@ -178,10 +186,16 @@ toll=[10^-1 10^-2 10^-3  10^-4 10^-5 10^-6 10^-7 10^-8 10^-9 10^-10 10^-12 10^-1
 Valuta_Performance(inline(funz),x0,toll,nummax);
 
 
+% --- Executes on button press in btnCasiTest.
 function btnCasiTest_Callback(hObject, eventdata, handles)
-% DA INSERIRE COLLEGAMENTO A PDF CASI TEST
+% hObject    handle to btnCasiTest (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
 
 
+% --- Executes on button press in btnInfo.
 function btnInfo_Callback(hObject, eventdata, handles)
-
+% hObject    handle to btnInfo (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
 open('LiveScript/Documentazione_Bisezione.pdf')

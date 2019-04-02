@@ -17,16 +17,15 @@ end
 
 if (nargin>=3)
     controllo_TOL(TOL);
-else
-    warning('settato eps');
-    TOL=eps;
-end
+    else
+        warning('settato eps');
+        TOL=eps;
+    end
+    if(nargin==4)
+  controllo_NMAX(NMAX);
+    else NMAX=500;
+    end
 
-if(nargin==4)
-    controllo_NMAX(NMAX);
-else
-    NMAX=500;
-end
 
 % Questa funzione confronta i risultati degli algoritmi di bisezione e
 % fzero restituendone l'errore relativo

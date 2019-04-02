@@ -14,16 +14,19 @@ end
 if(x0(1)==x0(2))
     %inserito verifica intervallo
     errordlg('Valori di a e b uguali','Errore');
-    error('valori dell intervallo uguali');
+   error('valori dell intervallo uguali');
+     
 else
     if(nargin<3)
-        error('Inserire i valori di tolleranza!');
-    end
+  error('Inserire i valori di tolleranza!');
+end
+                   
     if(nargin==4)
-        controllo_NMAX(NMAX);
+        
+  controllo_NMAX(NMAX);
     else NMAX=500;
     end
-end
+end 
     
  %inizializzazione delle variabil contenenti i risultati
 RisultatiBisezione = zeros(1,14);
