@@ -182,7 +182,7 @@ classdef exec_tests < matlab.unittest.TestCase
                %Caso 14 : Verifica se il valore di NMAX 
                %� minore o uguale a 2
                %Richiamo i parametri
-                [~,~,~,NMAX] = Richiama_Parametri();
+                %[~,~,~,NMAX] = Richiama_Parametri();
                 if(testCase.NMAX<=2)
                     verifyReturnsTrue(testCase,@false)
                 else
