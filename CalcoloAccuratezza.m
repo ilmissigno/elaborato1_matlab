@@ -15,13 +15,13 @@ if(x0(1)==x0(2))
 end
 if (nargin>=3)
   controllo_TOL(TOL);
-                   
+
     else
         warning('settato eps');
         TOL=eps;
     end
     if(nargin==4)
-        
+        %
   controllo_NMAX(NMAX);
     else NMAX=500;
     end
@@ -33,5 +33,3 @@ if (nargin>=3)
     options = optimset('TolX',TOL);
     SoluzioneOttima = fzero(f,x0,options);
     erroreRelativo = abs(RisultatoCorrente - SoluzioneOttima)/abs(SoluzioneOttima);
-
-
