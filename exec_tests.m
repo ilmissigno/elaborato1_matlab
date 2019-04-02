@@ -8,14 +8,12 @@ classdef exec_tests < matlab.unittest.TestCase
            %verifica l'errore nel caso in cui il primo estremo o il secondo estremo dell'intervallo inserito
            %non � un numero
           
-           [f,x0] = Richiama_Parametri();
-             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
-            %testa l'errore
-            if(~isnumeric(x0(1)) || ~isnumeric(x0(2)))
+                [f,x0] = Richiama_Parametri();
+                if(~isnumeric(x0(1)) || ~isnumeric(x0(2)))
                 verifyReturnsTrue(testCase,@false);
-            else 
+                else 
                 verifyReturnsTrue(testCase,@true);
-            end
+                end
             
               end
         
@@ -25,13 +23,12 @@ classdef exec_tests < matlab.unittest.TestCase
            %dell'intervallo sono vuoti
           
            [f,x0] = Richiama_Parametri();
-             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
-            %testa l'errore
-            if(isempty(x0(1)) && isempty(x0(2)))
-                verifyReturnsTrue(testCase,@false);
-            else 
-                verifyReturnsTrue(testCase,@true);
-            end
+            
+                if(isempty(x0(1)) && isempty(x0(2)))
+                    verifyReturnsTrue(testCase,@false);
+                else 
+                    verifyReturnsTrue(testCase,@true);
+                end
             
             end  
              
@@ -42,9 +39,7 @@ classdef exec_tests < matlab.unittest.TestCase
            %dell'intervallo sono uguali
           
            [f,x0] = Richiama_Parametri();
-             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
-            %testa l'errore
-            verifyNotEqual(testCase,x0(1),x0(2));
+           verifyNotEqual(testCase,x0(1),x0(2));
             
        end       
         
@@ -55,8 +50,6 @@ classdef exec_tests < matlab.unittest.TestCase
            %da 2 come lunghezza dell'intervallo
           
            [f,x0] = Richiama_Parametri();
-             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
-            %testa l'errore
             if(length(x0)~=2)
                 verifyReturnsTrue(testCase,@false);
             else 
@@ -71,8 +64,6 @@ classdef exec_tests < matlab.unittest.TestCase
            %degli zeri
           
            [f,x0] = Richiama_Parametri();
-             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
-            %testa l'errore
             if(f(x0(1))*f(x0(2)) > 0)
                 verifyReturnsTrue(testCase,@false);
             else 
@@ -88,7 +79,6 @@ classdef exec_tests < matlab.unittest.TestCase
             actSolution=x;
             expSolution= fzero(f,x0);
             abs_error = abs(actSolution - expSolution)/abs(expSolution);
-            %assert(isequal(actSolution,expSolution));
             verifyLessThan(testCase,abs_error,eps*max(actSolution,expSolution),'Risultato poco accurato');
             
          end
@@ -101,7 +91,6 @@ classdef exec_tests < matlab.unittest.TestCase
             options = optimset('TolX',TOL);
             expSolution=fzero(f,x0,options);
             abs_error = abs(actSolution - expSolution)/abs(expSolution);
-            %assert(isequal(actSolution,expSolution));
             verifyLessThan(testCase,abs_error,eps*max(actSolution,expSolution),'Risultato poco accurato');
             
         end
@@ -109,8 +98,6 @@ classdef exec_tests < matlab.unittest.TestCase
         function TestCase9(testCase)
             %Il test non passa se la tolleranza non � inserita dall'utente
             [f,x0,TOL] = Richiama_Parametri();
-            
-            %assert(isequal(actSolution,expSolution));
             verifyNotEmpty(testCase,TOL);
             
         end
@@ -122,7 +109,7 @@ classdef exec_tests < matlab.unittest.TestCase
            %Caso 10 : Verifica se la funzione � Handle
            %Richiamo i parametri
             [f,~,~,~] = Richiama_Parametri();
-           %testa l'errore
+
                 if(isa(f,'function_handle'))
                    %passato
                     verifyReturnsTrue(testCase,@true);
@@ -194,11 +181,11 @@ classdef exec_tests < matlab.unittest.TestCase
             %minore di eps
             [f,x0,TOL] = Richiama_Parametri();
             
-           if(TOL < eps)
+                if(TOL < eps)
               verifyReturnsTrue(testCase,@false) 
-           else
+                else
                verifyReturnsTrue(testCase,@true)
-           end
+                end
             
             end
             
@@ -207,13 +194,13 @@ classdef exec_tests < matlab.unittest.TestCase
             %un numero
             [f,x0,TOL] = Richiama_Parametri();
             
-           if(~isscalar(TOL) || ~isnumeric(TOL) || isinf(TOL) || isnan(TOL) )
+                  if(~isscalar(TOL) || ~isnumeric(TOL) || isinf(TOL) || isnan(TOL) )
               verifyReturnsTrue(testCase,@false) 
-           else
+                  else
                verifyReturnsTrue(testCase,@true)
-           end
+                  end
             
-            end 
+           end 
         
             
     end

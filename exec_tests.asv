@@ -8,14 +8,12 @@ classdef exec_tests < matlab.unittest.TestCase
            %verifica l'errore nel caso in cui il primo estremo o il secondo estremo dell'intervallo inserito
            %non ï¿½ un numero
           
-           [f,x0] = Richiama_Parametri();
-             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
-            %testa l'errore
-            if(~isnumeric(x0(1)) || ~isnumeric(x0(2)))
+                [f,x0] = Richiama_Parametri();
+                if(~isnumeric(x0(1)) || ~isnumeric(x0(2)))
                 verifyReturnsTrue(testCase,@false);
-            else 
+                else 
                 verifyReturnsTrue(testCase,@true);
-            end
+                end
             
               end
         
@@ -25,8 +23,7 @@ classdef exec_tests < matlab.unittest.TestCase
            %dell'intervallo sono vuoti
           
            [f,x0] = Richiama_Parametri();
-             %[x, uscita, graf]= algoritmo_di_bisezione(f,x0);
-            %testa l'errore
+            
             if(isempty(x0(1)) && isempty(x0(2)))
                 verifyReturnsTrue(testCase,@false);
             else 
@@ -194,26 +191,28 @@ classdef exec_tests < matlab.unittest.TestCase
             %minore di eps
             [f,x0,TOL] = Richiama_Parametri();
             
-           if(TOL < 0)
+           if(TOL < eps)
               verifyReturnsTrue(testCase,@false) 
            else
                verifyReturnsTrue(testCase,@true)
            end
             
             end
-        
-            function TestCase17(testCase)
-            %Il test non passa se la tolleranza inserita dall'utente è
-            %compresa da
+            
+           function TestCase17(testCase)
+            %Il test non passa se la tolleranza inserita dall'utente non è
+            %un numero
             [f,x0,TOL] = Richiama_Parametri();
             
-           if(TOL>0 && TOL<eps)
+           if(~isscalar(TOL) || ~isnumeric(TOL) || isinf(TOL) || isnan(TOL) )
               verifyReturnsTrue(testCase,@false) 
            else
-               verifyReturnsTrue(testCase,@false)
+               verifyReturnsTrue(testCase,@true)
            end
             
-        end
+            end 
+        
+            
     end
 end
 
