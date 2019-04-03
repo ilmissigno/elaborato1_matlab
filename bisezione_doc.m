@@ -53,7 +53,7 @@
 
 format long e
 f = @(x) 2-exp(-x)-sqrt(x);
-x0 = [0 0];
+x0 = [0 4];
 TOL = 10^-15;
 NMAX = 500;
 %[x, uscita, graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
