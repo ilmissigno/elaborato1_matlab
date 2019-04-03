@@ -59,18 +59,19 @@ if(nargin==0)
 end
 %Se inserisco un solo valore (funzione soltanto)
 if(nargin==1)
-    error('Inserire intervallo assieme alla funzione');
+    error('Err:IntevalloVuoto','Inserire intervallo assieme alla funzione');
 end
 if(x0(1)==x0(2))
     %inserito verifica intervallo
-    errordlg('Valori di a e b uguali','Errore');
-   error('valori dell intervallo uguali');
+    %errordlg('Valori di a e b uguali','Errore');
+    error('Err:EstremiIntervallo','Intervallo Uguali.') ;
+   %error('valori dell intervallo uguali');
 end
 if (nargin>=3)
   controllo_TOL(TOL);
                    
     else
-        warning('settato eps');
+        warning('WARN:TolleranzaNonInserita','settato eps');
         TOL=eps;
     end
     if(nargin==4)
@@ -100,8 +101,8 @@ if(abs(fb)<eps)
 else
 %% Controllo il soddisfacimento del teorema degli zeri
     if(fa*fb>0)
-        errordlg('La funzione non ha zeri nell intervallo specificato','Errore');
-        error('La funzione non ha zeri nell intervallo specificato');
+        %errordlg('La funzione non ha zeri nell intervallo specificato','Errore');
+        error('Err:TeoremaDegliZeriNonSoddisfatto''La funzione non ha zeri nell intervallo specificato');
     end
  %% Parte iterativa ai fini della soluzione del problema
     while((abs(b-a))>=(TOL*max(abs(a),abs(b))) && abs(fc)>=eps && niter<NMAX)
@@ -126,6 +127,12 @@ elseif(nargout==2)
     X = x;
     result.fx = fc;
     result.numiter = niter;
+    if(result.numiter>NMAX)
+         error('Err:Superato il numero massimo di Iterazioni-SOluzione non determinata','Non è possibile trovare il risultato numiiter>NMAX ');
+    end
+         if(result.numiter>800)
+                warning('WARN:Numero di iterazioni alte,prestazioni non ottimali','Il numero di iterazioni per determinare la soluzione è grande.Prestazioni non ottimali');
+         end
 elseif(nargout==3)
     X = x;
     result.fx = fc;

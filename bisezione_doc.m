@@ -53,9 +53,9 @@
 
 format long e
 f = @(x) 2-exp(-x)-sqrt(x);
-x0 = [0 4];
+x0 = [0 0];
 TOL = 10^-15;
-NMAX = 999;
+NMAX = 500;
 %[x, uscita, graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
 %accuratezza=CalcoloAccuratezza(f,x0,TOL,NMAX);
 %TOL=[10^-1 10^-2 10^-3  10^-4 10^-5 10^-6 10^-7 10^-8 10^-9 10^-10 10^-12 10^-13 10^-14 eps];
