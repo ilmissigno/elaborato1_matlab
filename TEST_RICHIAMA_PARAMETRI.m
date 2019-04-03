@@ -57,7 +57,8 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
         function TestCase6(testCase)
             %verifica l'errore nel caso in cui entrambi i valori
             %dell'intervallo sono uguali
-            verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'Err:EstremiIntervallo');
+            [f,x0,TOL,NMAX] = Richiama_Parametri();
+            verifyError(testCase,@()algoritmo_di_bisezione(f,x0,TOL,NMAX),'Err:EstremiIntervallo');
             
             
         end
@@ -150,7 +151,7 @@ end
         
         function TestCase16(testCase)
             %verifica se l'accuratezza � adeguata con TOL inserito da Utente
-            [f,x0] = Richiama_Parametri();
+            [f,x0,TOL] = Richiama_Parametri();
             [x, ~, ~]= algoritmo_di_bisezione(f,x0,TOL);
             actSolution=x;
             options = optimset('TolX',TOL);
