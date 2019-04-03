@@ -61,24 +61,20 @@ end
 if(nargin==1)
     error('Err:IntevalloVuoto','Inserire intervallo assieme alla funzione');
 end
-if(x0(1)==x0(2))
-    %inserito verifica intervallo
-    %errordlg('Valori di a e b uguali','Errore');
-    error('Err:EstremiIntervallo','Intervallo Uguali.') ;
-   %error('valori dell intervallo uguali');
-end
+
+controllo_IntervalloFunz(f,x0);
+
 if (nargin>=3)
-  controllo_TOL(TOL);
-                   
-    else
-        warning('WARN:TolleranzaNonInserita','settato eps');
-        TOL=eps;
-    end
-    if(nargin==4)
-        
-  controllo_NMAX(NMAX);
-    else NMAX=500;
-    end
+    controllo_TOL(TOL);
+else
+    warning('WARN:TolleranzaNonInserita','settato eps');
+    TOL=eps;
+end
+if(nargin==4)
+    controllo_NMAX(NMAX);
+else
+    NMAX=500;
+end
 
 
 %% Inizializzazione delle variabili 

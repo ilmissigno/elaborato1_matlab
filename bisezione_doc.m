@@ -50,12 +50,13 @@
 %% Descrizione
 % L'algoritmo di Bisezione riceve in ingresso la funzione e l'intervallo in
 % cui deve calcolare il valore di annullamento della stessa.
-
+%{
 format long e
 f = @(x) 2-exp(-x)-sqrt(x);
-x0 = [0 4];
+x0 = [0 0];
 TOL = 10^-15;
 NMAX = 500;
+%}
 %[x, uscita, graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX);
 %accuratezza=CalcoloAccuratezza(f,x0,TOL,NMAX);
 %TOL=[10^-1 10^-2 10^-3  10^-4 10^-5 10^-6 10^-7 10^-8 10^-9 10^-10 10^-12 10^-13 10^-14 eps];
@@ -64,6 +65,6 @@ NMAX = 500;
 %Valuta_Performance(f,x0,TOL,NMAX);
 %result1 = runtests('exec_tests.m');
 %table(result1)
-test=exec_tests(f,x0,TOL,NMAX);
-result1 = run(test);
+%test=exec_tests(f,x0,TOL,NMAX);
+result1 = runtests('TEST_RICHIAMA_PARAMETRI.m');
 table(result1)
