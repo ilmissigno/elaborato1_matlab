@@ -1,7 +1,6 @@
 classdef exec_tests < matlab.unittest.TestCase
     
     %NB i test  vanno in ordine!
-    %forse testare una funz alla volta
     properties
         f
         x0
@@ -36,16 +35,16 @@ classdef exec_tests < matlab.unittest.TestCase
     end
     
     methods(Test)
-        function TestCase1(testCase)
-            %Verifica se la funzione non ï¿½ presente
-           
+        function TestCase11(testCase)
+            %Caso 11 : Verifica se la funzione non ï¿½ presente
+            %Richiamo i parametri
             
             %Ho problemi ad implementarla nel test
             verifyNotEmpty(testCase,testCase.f);
         end
          
-        function TestCase2(testCase)
-          % Verifica se la funzione ï¿½ Handle
+        function TestCase10(testCase)
+            %Caso 10 : Verifica se la funzione ï¿½ Handle
             
             %SI DEVE IMPLEMENTARE COME CONTROLLO SU F NEL PROGRAMMA
             %PRINCIPALE
@@ -70,7 +69,7 @@ classdef exec_tests < matlab.unittest.TestCase
             
         end 
         
-         function TestCase4(testCase)
+         function TestCase2(testCase)
             %verifica l'errore nel caso in cui il primo estremo o il secondo estremo dell'intervallo inserito
             %non ï¿½ un numero
             
@@ -102,7 +101,7 @@ classdef exec_tests < matlab.unittest.TestCase
             
          end
         
-        function TestCase6(testCase)
+        function TestCase4(testCase)
             %verifica l'errore nel caso in cui entrambi i valori
             %dell'intervallo sono uguali
             verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'Err:EstremiIntervallo');
@@ -110,7 +109,7 @@ classdef exec_tests < matlab.unittest.TestCase
             
         end
         
-        function TestCase7(testCase)
+        function TestCase6(testCase)
             %verifica l'errore nel caso in cui non ï¿½ soddisfatto il teorema
             %degli zeri
             verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'Err:TeoremaDegliZeriNonSoddisfatto');
@@ -118,13 +117,13 @@ classdef exec_tests < matlab.unittest.TestCase
             
         end
         
-         function TestCase8(testCase)
+         function TestCase9(testCase)
             %Il test non passa se la tolleranza non ï¿½ inserita dall'utente
             
             verifyWarning(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'WARN:TolleranzaNonInserita');
             
          end
-         function TestCase9(testCase)
+         function TestCase16(testCase)
             %Il test non passa se la tolleranza inserita dall'utente è
             %minore di eps
             
@@ -133,56 +132,34 @@ classdef exec_tests < matlab.unittest.TestCase
             
         end
         
-        function TestCase10(testCase)
+        function TestCase17(testCase)
             %Il test non passa se la tolleranza inserita dall'utente non è
             %un numero
             
             verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'Err:TolleranzaNumReale');
             
         end
-         function TestCase11(testCase)
-            %Caso 12 : Verifica se il valore di NMAX
-            %non ï¿½ numerico, non ï¿½ scalare, ï¿½ infinito
-            %oppure ï¿½ NaN
-            
-            verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'Err:NMAXINTEROPOsitivo');
-            
-            
-        end
         
-        function TestCase12(testCase)
-            % Verifica se il valore di NMAX
-            %ï¿½ minore o uguale a 0
-            %Richiamo i parametri
-            
-            verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'Err:NMAXINTEROPOsitivo');
-        end
-        
-        function TestCase13(testCase)
-            %Verifica se il valore di NMAX
-            %ï¿½ minore o uguale a 2
-           
-            
-            verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX), 'Err:NMAXI<2');
-            
-        end
-        
-        function TestCase14(testCase)
-            %Verifica se il valore di NMAX
-            %ï¿½ maggiore o uguale a 1000
-            
-            
-            verifyWarning(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX), 'WARN:NMAXI>1000');
-            
-        end
-        
-         function TestCase15(testCase)
+        function TestCase1(testCase)
             
             verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'Err:Superato il numero massimo di Iterazioni-SOluzione non determinata' );
             
-         end
+        end
         
-        function TestCase16(testCase)
+       
+        
+        
+        
+        
+        
+        
+        
+        
+       
+        
+        
+        
+        function TestCase7(testCase)
             %verifica se l'accuratezza ï¿½ adeguata con TOL=eps
             
             [x, ~, ~]= algoritmo_di_bisezione(testCase.f,testCase.x0);
@@ -193,7 +170,7 @@ classdef exec_tests < matlab.unittest.TestCase
             %FATTA BENE forse poco utile
         end
         
-        function TestCase17(testCase)
+        function TestCase8(testCase)
             %verifica se l'accuratezza ï¿½ adeguata con TOL inserito da Utente
             
             [x, ~, ~]= algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL);
@@ -204,22 +181,6 @@ classdef exec_tests < matlab.unittest.TestCase
             verifyLessThan(testCase,abs_error,eps*max(actSolution,expSolution),'Risultato poco accurato');
             %FATTA BENE
         end
-       
-       
-        
-       
-        
-        
-        
-        
-        
-        
-        
-        
-       
-        
-        
-        
         
        
         
@@ -228,6 +189,42 @@ classdef exec_tests < matlab.unittest.TestCase
        
         
        
+        function TestCase12(testCase)
+            %Caso 12 : Verifica se il valore di NMAX
+            %non ï¿½ numerico, non ï¿½ scalare, ï¿½ infinito
+            %oppure ï¿½ NaN
+            
+            verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'Err:NMAXINTEROPOsitivo');
+            
+            
+        end
+        
+        function TestCase13(testCase)
+            %Caso 13 : Verifica se il valore di NMAX
+            %ï¿½ minore o uguale a 0
+            %Richiamo i parametri
+            
+            verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'Err:NMAXINTEROPOsitivo');
+        end
+        
+        function TestCase14(testCase)
+            %Caso 14 : Verifica se il valore di NMAX
+            %ï¿½ minore o uguale a 2
+            %Richiamo i parametri
+            
+            verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX), 'Err:NMAXI<2');
+            
+        end
+        
+        function TestCase15(testCase)
+            %Caso 15 : Verifica se il valore di NMAX
+            %ï¿½ maggiore o uguale a 1000
+            
+            
+            verifyWarning(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX), 'WARN:NMAXI>1000');
+            
+        end
+        
        
         function TestCase18(testCase)
             
