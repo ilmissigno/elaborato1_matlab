@@ -98,7 +98,7 @@ else
 %% Controllo il soddisfacimento del teorema degli zeri
     if(fa*fb>0)
         %errordlg('La funzione non ha zeri nell intervallo specificato','Errore');
-        error('Err:TeoremaDegliZeriNonSoddisfatto''La funzione non ha zeri nell intervallo specificato');
+        error('Err:TeoremaDegliZeriNonSoddisfatto','La funzione non ha zeri nell intervallo specificato');
     end
  %% Parte iterativa ai fini della soluzione del problema
     while((abs(b-a))>=(TOL*max(abs(a),abs(b))) && abs(fc)>=eps && niter<NMAX)

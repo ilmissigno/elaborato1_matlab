@@ -83,7 +83,7 @@ classdef exec_tests < matlab.unittest.TestCase
 
 
 
-            verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'Err:Non�unNumero');
+            verifyError(testCase,@()algoritmo_di_bisezione(testCase.f,testCase.x0,testCase.TOL,testCase.NMAX),'Err:NonunNumero');
 
 
          end
