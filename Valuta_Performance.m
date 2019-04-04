@@ -12,7 +12,7 @@ if(nargin==1)
     error('Inserire intervallo assieme alla funzione');
 end
 if(x0(1)==x0(2))
-    %inserito verifica intervallo
+    %verifica intervallo inserito
     errordlg('Valori di a e b uguali','Errore');
     error('valori dell intervallo uguali');
 else
@@ -21,11 +21,12 @@ else
     end
     if(nargin==4)
         controllo_NMAX(NMAX);
-    else NMAX=500;
+    else
+        NMAX=500;
     end
 end
     
- %inizializzazione delle variabil contenenti i risultati
+%Inizializzazione delle variabili contenenti i risultati
 RisultatiBisezione = zeros(1,14);
 RisultatiFzero = zeros(1,14);
 
@@ -38,17 +39,12 @@ for i = 1:14
        
 end
  
-
-
-
 plot(categorical(TOL),(RisultatiBisezione),'r--*',categorical(TOL),(RisultatiFzero),'b--*');
 hold on;
-
 grid on;
 title('Algoritmo di Bisezione VS FZero');
 legend('Risultati Bisezione','Risultati Fzero','Location','northwest');
-% il successivo comando cambia la direzione dell'asse x
-set(gca,'Xdir','reverse');
+set(gca,'Xdir','reverse'); %cambia la direzione dell'asse x
 xlabel('TOL') ;
 ylabel('Numero di iterazioni') 
 hold off

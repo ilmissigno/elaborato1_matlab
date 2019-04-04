@@ -57,9 +57,9 @@ function [X,result,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
 warning('on');
 switch nargin
     case 0
-         error('Nessun valore in ingresso');
+        error('Nessun valore in ingresso');
     case 1
-         error('Err:IntevalloVuoto','Inserire intervallo assieme alla funzione');
+        error('Err:IntevalloVuoto','Inserire intervallo assieme alla funzione');
     case 2
         controllo_IntervalloFunz(f,x0);
         if(~exist('TOL','var'))
@@ -83,7 +83,7 @@ switch nargin
         controllo_NMAX(NMAX);
 end
 
-%% Inizializzazione delle variabili 
+%% Inizializzazione delle variabili
 niter = 0;
 a=x0(1);
 b=x0(2);
@@ -101,12 +101,11 @@ if(abs(fb)<eps)
     x=b;
     fc=f(b);
 else
-%% Controllo il soddisfacimento del teorema degli zeri
+    %% Controllo il soddisfacimento del teorema degli zeri
     if(fa*fb>0)
-        %errordlg('La funzione non ha zeri nell intervallo specificato','Errore');
         error('Err:TeoremaDegliZeriNonSoddisfatto','La funzione non ha zeri nell intervallo specificato');
     end
- %% Parte iterativa ai fini della soluzione del problema
+    %% Parte iterativa ai fini della soluzione del problema
     while((abs(b-a))>=(TOL*max(abs(a),abs(b))) && abs(fc)>=eps && niter<NMAX)
         niter = niter + 1;
         if((fa*fc)<0)
@@ -126,7 +125,7 @@ if(niter>=NMAX)
     error('Err:OverflowIterations','Non è possibile trovare il risultato numiiter>NMAX ');
 end
 if(nargout==1)
-   X = x;
+    X = x;
 elseif(nargout==2)
     X = x;
     result.fx = fc;

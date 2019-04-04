@@ -1,11 +1,11 @@
 function varargout = MainGUI(varargin)
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
-                   'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @MainGUI_OpeningFcn, ...
-                   'gui_OutputFcn',  @MainGUI_OutputFcn, ...
-                   'gui_LayoutFcn',  [] , ...
-                   'gui_Callback',   []);
+    'gui_Singleton',  gui_Singleton, ...
+    'gui_OpeningFcn', @MainGUI_OpeningFcn, ...
+    'gui_OutputFcn',  @MainGUI_OutputFcn, ...
+    'gui_LayoutFcn',  [] , ...
+    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
     gui_State.gui_Callback = str2func(varargin{1});
 end
@@ -22,7 +22,7 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 
-function varargout = MainGUI_OutputFcn(hObject, eventdata, handles) 
+function varargout = MainGUI_OutputFcn(hObject, eventdata, handles)
 
 varargout{1} = handles.output;
 
@@ -121,8 +121,8 @@ else
         errordlg('Esponente specificato positivo! Il valore di tolleranza deve essere molto piccolo, inserire un esponente negativo.','Errore');
         return
     else
-    toll = 10.^(toll);
-    controllo_TOL(toll);
+        toll = 10.^(toll);
+        controllo_TOL(toll);
     end
 end
 if(isempty(nummax))

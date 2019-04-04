@@ -4,18 +4,8 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
     
     methods(Test)
         
-        %function TestCase2(testCase)
-            % Verifica se la funzione ï¿½ Handle
-            
-            
-           % [f, x0 TOL, NMAX] = Richiama_Parametri();
-            %IMPLEMENTATA
-           % verifyError(testCase,@()algoritmo_di_bisezione(x^2,x0,TOL,NMAX),'Err:FunzHandle');
-        %end
-        
         function TestCase3(testCase)
-            %verifica l'errore nel caso in cui entrambi i valori
-            %dell'intervallo sono vuoti
+            %verifica l'errore nel caso in cui l'intervallo è vuoto
             
             [f,x0,TOL,NMAX] = Richiama_Parametri();
             
@@ -25,7 +15,7 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
         end
         
         function TestCase4(testCase)
-            %verifica l'errore nel caso in cui il primo estremo o il secondo estremo dell'intervallo inserito
+            %verifica l'errore nel caso in cui il secondo estremo dell'intervallo inserito
             %non ï¿½ un numero
             
             
@@ -42,7 +32,6 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
             %verifica l'errore nel caso in cui i valori dell'intervallo non
             %sono validi, poichï¿½ o inseriamo un numero di elementi diverso
             %da 2 come lunghezza dell'intervallo
-            %DA TOGLIERE O RIMANERE COSI
             [f, x0, TOL, NMAX] = Richiama_Parametri();
             verifyError(testCase,@()algoritmo_di_bisezione(f,[ 1 2 3],TOL,NMAX),'Err:LungInter');
         end
@@ -66,13 +55,14 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
         end
         
         function TestCase8(testCase)
-            %Il test non passa se la tolleranza non ï¿½ inserita dall'utente
+            %Verifica il warning nel caso in cui la tollerenza non è
+            %inserita dall'utente
             [f,x0,~,~] = Richiama_Parametri();
             verifyWarning(testCase,@()algoritmo_di_bisezione(f,x0),'WARN:TolleranzaNonInserita');
             
         end
         function TestCase9(testCase)
-            %Il test non passa se la tolleranza inserita dall'utente ï¿½
+            %Verifica l'errore nel caso in cui il valore di TOL inserito è
             %minore di eps
             [f,x0,TOL,NMAX] = Richiama_Parametri();
             verifyError(testCase,@()algoritmo_di_bisezione(f,x0,-1,NMAX),'Err:TolleranzaMINESP');
@@ -81,16 +71,15 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
         end
         
         function TestCase10(testCase)
-            %Il test non passa se la tolleranza inserita dall'utente non ï¿½
-            %un numero
+            %Verifica l'errore nel caso in cui il valore di TOL inserito è
+            %un carattere
             [f,x0,TOL,NMAX] = Richiama_Parametri();
             verifyError(testCase,@()algoritmo_di_bisezione(f,x0,'a',NMAX),'Err:TolleranzaNumReale');
             
         end
         function TestCase11(testCase)
-            %Caso 12 : Verifica se il valore di NMAX
-            %non ï¿½ numerico, non ï¿½ scalare, ï¿½ infinito
-            %oppure ï¿½ NaN
+            %Verifica l'errore nel caso in cui il valore di NMAX inserito è
+            %non è un numero, in particolare è un carattere
             [f,x0,TOL,NMAX] = Richiama_Parametri();
             verifyError(testCase,@()algoritmo_di_bisezione(f,x0,TOL,'a'),'Err:NMAXINTEROPOsitivo');
             
@@ -98,16 +87,15 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
         end
         
         function TestCase12(testCase)
-            % Verifica se il valore di NMAX
-            %ï¿½ minore o uguale a 0
-            %Richiamo i parametri
+            % Verifica l'errore nel caso in cui il valore di NMAX inserito è
+            %minore di 0
             [f,x0,TOL,NMAX] = Richiama_Parametri();
             verifyError(testCase,@()algoritmo_di_bisezione(f,x0,TOL,-1),'Err:NMAXINTEROPOsitivo');
         end
         
         function TestCase13(testCase)
-            %Verifica se il valore di NMAX
-            %ï¿½ minore o uguale a 2
+            %Verifica l'errore nel caso in cui il valore di NMAX inserito è
+            %minore di 2
             
             [f,x0,TOL,NMAX] = Richiama_Parametri();
             verifyError(testCase,@()algoritmo_di_bisezione(f,x0,TOL,1), 'Error:NMAXMin');
@@ -115,8 +103,8 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
         end
         
         function TestCase14(testCase)
-            %Verifica se il valore di NMAX
-            %ï¿½ maggiore o uguale a 1000
+            %Verifica un Warning nel caso in cui il valore di NMAX inserito
+            %è maggiore di 1000
             
             [f,x0,TOL,NMAX] = Richiama_Parametri();
             verifyWarning(testCase,@()algoritmo_di_bisezione(f,x0,TOL,1500),'Warning:NMAX1000');
@@ -131,7 +119,7 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
             
         end
         
-
+        
         
         function TestCase16(testCase)
             %verifica se l'accuratezza ï¿½ adeguata con TOL inserito da Utente
@@ -142,7 +130,7 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
             expSolution=fzero(f,x0,options);
             abs_error = abs(actSolution - expSolution)/abs(expSolution);
             verifyLessThan(testCase,abs_error,eps*max(actSolution,expSolution),'Risultato poco accurato');
-            %FATTA BENE
+            
         end
         
     end
@@ -154,12 +142,9 @@ end
 
 function [f,x0,TOL,NMAX] = Richiama_Parametri()
 
-
 f =  @(x) x.^2-4;
 x0 =[0 4];
 TOL = 10^-15;
 NMAX = 600;
-
-
 
 end
