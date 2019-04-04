@@ -12,13 +12,13 @@ function controllo_NMAX(NMAX)
     % NMAX 1
          if (NMAX < 2)
              errordlg('Il numero di iterazioni inserito è troppo piccolo, il numero minimo di iterazioni è 2 ','Errore');
-             error('Error:NMAXMin','Il numero di iterazioni inserito è troppo piccolo, il numero minimo di iterazioni è 2 ');
+             error('Err:NMAXMin','Il numero di iterazioni inserito è troppo piccolo, il numero minimo di iterazioni è 2 ');
          end
     
     % Segnalo se NMAX è grande
          if (NMAX > 1000)
             warndlg('Il numero di iterazioni inserito è molto alto, l''esecuzione potrebbe essere più lenta','Attenzione');
-                 warning('Warning:NMAX1000','Il numero di iterazioni inserito è molto alto');
+                 warning('Warn:NMAX1000','Il numero di iterazioni inserito è molto alto');
            uiwait(gcf);
          end
     end
