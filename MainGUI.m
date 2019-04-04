@@ -22,7 +22,7 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 
-function varargout = MainGUI_OutputFcn(hObject, eventdata, handles) 
+function varargout = MainGUI_OutputFcn(hObject, eventdata, handles)
 
 varargout{1} = handles.output;
 
@@ -179,9 +179,9 @@ Valuta_Performance(str2func(funz),x0,toll,nummax);
 
 
 function btnCasiTest_Callback(hObject, eventdata, handles)
-% DA INSERIRE COLLEGAMENTO A PDF CASI TEST
+open('Test_Algoritmo_di_bisezione.pdf')
 
 
 function btnInfo_Callback(hObject, eventdata, handles)
 
-open('LiveScript/Documentazione_Bisezione.pdf')
+open('Documentazione_Bisezione.pdf')
