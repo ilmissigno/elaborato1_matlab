@@ -67,7 +67,7 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
         
         function TestCase8(testCase)
             %Il test non passa se la tolleranza non � inserita dall'utente
-            [f,x0,TOL,NMAX] = Richiama_Parametri();
+            [f,x0,~,~] = Richiama_Parametri();
             verifyWarning(testCase,@()algoritmo_di_bisezione(f,x0),'WARN:TolleranzaNonInserita');
             
         end
@@ -110,7 +110,7 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
             %� minore o uguale a 2
             
             [f,x0,TOL,NMAX] = Richiama_Parametri();
-            verifyError(testCase,@()algoritmo_di_bisezione(f,x0,TOL,1),'Err:NMAXMin');
+            verifyError(testCase,@()algoritmo_di_bisezione(f,x0,TOL,1), 'Error:NMAXMin');
             
         end
         
@@ -119,13 +119,15 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
             %� maggiore o uguale a 1000
             
             [f,x0,TOL,NMAX] = Richiama_Parametri();
-            verifyWarning(testCase,@()algoritmo_di_bisezione(f,x0,TOL,1500),'Warn:NMAX1000');
+            verifyWarning(testCase,@()algoritmo_di_bisezione(f,x0,TOL,1500),'Warning:NMAX1000');
             
         end
         
         function TestCase15(testCase)
             [f,x0,TOL,NMAX] = Richiama_Parametri();
-            verifyError(testCase,@()algoritmo_di_bisezione(f,x0,eps,3),'Err:Superato il numero massimo di Iterazioni-SOluzione non determinata' );
+            f = @(x) 2-exp(-x)-sqrt(x);
+            x0 = [0 4];
+            verifyError(testCase,@()algoritmo_di_bisezione(f,x0,eps,5),'Err:OverflowIterations' );
             
         end
         
@@ -141,13 +143,6 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
             abs_error = abs(actSolution - expSolution)/abs(expSolution);
             verifyLessThan(testCase,abs_error,eps*max(actSolution,expSolution),'Risultato poco accurato');
             %FATTA BENE
-        end
-        
-        
-        function TestCase17(testCase)
-            [f,x0,TOL,NMAX] = Richiama_Parametri();
-            verifyWarning(testCase,@()algoritmo_di_bisezione(f,x0,eps,NMAX),'WARN:Numero di iterazioni alte,prestazioni non ottimali');
-            
         end
         
     end

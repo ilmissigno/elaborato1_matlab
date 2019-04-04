@@ -54,28 +54,34 @@
 function [X,result,graf] = algoritmo_di_bisezione(f,x0,TOL,NMAX)
 
 %% Controllo dei parametri di ingresso
-if(nargin==0)
-    error('Nessun valore in ingresso');
+warning('on');
+switch nargin
+    case 0
+         error('Nessun valore in ingresso');
+    case 1
+         error('Err:IntevalloVuoto','Inserire intervallo assieme alla funzione');
+    case 2
+        controllo_IntervalloFunz(f,x0);
+        if(~exist('TOL','var'))
+            warning('WARN:TolleranzaNonInserita','settato eps')
+            TOL=eps;
+        end
+        if(~exist('NMAX','var'))
+            warning('WARN:NMAXNonInserito','Numero iterazioni massimo non specificato, uso 500 come valore di default');
+            NMAX=500;
+        end
+    case 3
+        controllo_IntervalloFunz(f,x0);
+        controllo_TOL(TOL);
+        if(~exist('NMAX','var'))
+            warning('WARN:NMAXNonInserito','Numero iterazioni massimo non specificato, uso 500 come valore di default');
+            NMAX=500;
+        end
+    case 4
+        controllo_IntervalloFunz(f,x0);
+        controllo_TOL(TOL);
+        controllo_NMAX(NMAX);
 end
-%Se inserisco un solo valore (funzione soltanto)
-if(nargin==1)
-    error('Err:IntevalloVuoto','Inserire intervallo assieme alla funzione');
-end
-
-controllo_IntervalloFunz(f,x0);
-
-if (nargin>=3)
-    controllo_TOL(TOL);
-else
-    warning('WARN:TolleranzaNonInserita','settato eps');
-    TOL=eps;
-end
-if(nargin==4)
-    controllo_NMAX(NMAX);
-else
-    NMAX=500;
-end
-
 
 %% Inizializzazione delle variabili 
 niter = 0;
@@ -116,19 +122,15 @@ else
     end
 end
 %% Controllo sui parametri di uscita ed eventuale creazione del grafico di output
-
+if(niter>=NMAX)
+    error('Err:OverflowIterations','Non è possibile trovare il risultato numiiter>NMAX ');
+end
 if(nargout==1)
    X = x;
 elseif(nargout==2)
     X = x;
     result.fx = fc;
     result.numiter = niter;
-    if(result.numiter>NMAX)
-         error('Err:Superato il numero massimo di Iterazioni-SOluzione non determinata','Non è possibile trovare il risultato numiiter>NMAX ');
-    end
-         if(result.numiter>800)
-                warning('WARN:Numero di iterazioni alte,prestazioni non ottimali','Il numero di iterazioni per determinare la soluzione è grande.Prestazioni non ottimali');
-         end
 elseif(nargout==3)
     X = x;
     result.fx = fc;
