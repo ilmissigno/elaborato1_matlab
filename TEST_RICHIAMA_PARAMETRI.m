@@ -4,14 +4,14 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
     
     methods(Test)
         
-        function TestCase2(testCase)
+        %function TestCase2(testCase)
             % Verifica se la funzione � Handle
             
             
-            [f, x0 TOL, NMAX] = Richiama_Parametri();
+           % [f, x0 TOL, NMAX] = Richiama_Parametri();
             %IMPLEMENTATA
-            verifyError(testCase,@()algoritmo_di_bisezione(x^2,x0,TOL,NMAX),'Err:FunzHandle');
-        end
+           % verifyError(testCase,@()algoritmo_di_bisezione(x^2,x0,TOL,NMAX),'Err:FunzHandle');
+        %end
         
         function TestCase3(testCase)
             %verifica l'errore nel caso in cui entrambi i valori
@@ -110,7 +110,7 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
             %� minore o uguale a 2
             
             [f,x0,TOL,NMAX] = Richiama_Parametri();
-            verifyWarning(testCase,@()algoritmo_di_bisezione(f,x0,TOL,1), 'WARN:NMAXI minore di 2');
+            verifyError(testCase,@()algoritmo_di_bisezione(f,x0,TOL,1), 'Error:NMAXMin');
             
         end
         
@@ -119,7 +119,7 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
             %� maggiore o uguale a 1000
             
             [f,x0,TOL,NMAX] = Richiama_Parametri();
-            verifyWarning(testCase,@()algoritmo_di_bisezione(f,x0,TOL,1500), 'WARN:NMAXI minore di 1000');
+            verifyWarning(testCase,@()algoritmo_di_bisezione(f,x0,TOL,1500),'Warning:NMAX1000');
             
         end
         
