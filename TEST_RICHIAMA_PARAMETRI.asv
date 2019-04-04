@@ -1,6 +1,9 @@
 classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
     
+    
+    
     methods(Test)
+        
         
         function TestCase3(testCase)
             %% TEST INTERVALLO VUOTO
@@ -12,12 +15,13 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
             
         end
         
+       
         
-        
-        function TestCase4(testCase)       
+        function TestCase4(testCase)
+           
             %% TEST ESTREMI INTERVALLO
-            %verifica l'errore nel caso in cui il secondo estremo dell'intervallo inserito
-            %non è un numero
+             %verifica l'errore nel caso in cui il secondo estremo dell'intervallo inserito
+             %non è un numero
             
             [f, x0, TOL, NMAX] = Richiama_Parametri();
             verifyError(testCase,@()algoritmo_di_bisezione(f,[0 'a'],TOL,NMAX),'Err:NonunNumero');
@@ -119,9 +123,6 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
         end
         
         function TestCase15(testCase)
-            %% TEST NUM.ITERAZIONI
-            %verifica se il numero di iterazioni dell'algoritmo supera il
-            %valore di NMAX
             [f,x0,TOL,NMAX] = Richiama_Parametri();
             f = @(x) 2-exp(-x)-sqrt(x);
             x0 = [0 4];
