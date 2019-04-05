@@ -122,7 +122,7 @@ else
 end
 %% Controllo sui parametri di uscita ed eventuale creazione del grafico di output
 if(niter>=NMAX)
-    error('Err:OverflowIterations','Non è possibile trovare il risultato numiiter>NMAX ');
+    warning('WARN:OverflowIterations','Non è possibile trovare il risultato numiiter>NMAX ');
 end
 if(nargout==1)
     X = x;

@@ -2,6 +2,15 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
     
     methods(Test)
         
+        function TestCase2(testCase)
+            %% TEST FUNCTION HANDLE
+            %Verifica se la funzione immessa è una funzione handle
+            
+            [f,x0,TOL,NMAX] = Richiama_Parametri();
+            f = 'a'; %valore di errore
+            verifyError(testCase,@()algoritmo_di_bisezione(f,x0,TOL,NMAX),'Err:FunzHandle');
+        end
+        
         function TestCase3(testCase)
             %% TEST INTERVALLO VUOTO
             %verifica l'errore nel caso in cui l'intervallo è vuoto
@@ -125,7 +134,7 @@ classdef TEST_RICHIAMA_PARAMETRI < matlab.unittest.TestCase
             [f,x0,TOL,NMAX] = Richiama_Parametri();
             f = @(x) 2-exp(-x)-sqrt(x);
             x0 = [0 4];
-            verifyError(testCase,@()algoritmo_di_bisezione(f,x0,eps,5),'Err:OverflowIterations' );
+            verifyWarning(testCase,@()algoritmo_di_bisezione(f,x0,eps,5),'WARN:OverflowIterations' );
             
         end
         
